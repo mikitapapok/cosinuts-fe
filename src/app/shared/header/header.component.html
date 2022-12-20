@@ -1,44 +1,53 @@
- <header class="flex items-center ml-[107px] mt-[61px] mr-[107px]">
-   <img src="./assets/cosinuts-logo.png" alt="logo" width="155" height="53">
-   <nav class="ml-[27px] flex w-screen">
-          <ul class="flex items-center">
-            <li class="text-[18px] text-grey hover:text-orange cursor-pointer"
-            routerLinkActive="text-black"
-                [routerLinkActiveOptions]="{exact: true}"
-            >
-              <a routerLink="/">Главная</a>
-            </li>
-            <li class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer" routerLinkActive="text-black">
-              <a routerLink="catalog" >Каталог</a>
-              </li>
-            <li class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer" routerLinkActive="text-black">
-              <a routerLink="about" >О нас</a>
-            </li>
-            <li class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer" routerLinkActive="text-black">
-              <a routerLink="delivery" >
-              О доставке
-            </a></li>
-            <li class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer" routerLinkActive="text-black">
-              <a routerLink="shops" >
-              Магазины
-              </a>
-            </li>
-            <li class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer" routerLinkActive="text-black">
-              <a routerLink="contacts" >
-              Контакты
-              </a>
-            </li>
-          </ul>
-     <div class="ml-auto flex items-center ">
-       <div class="flex items-center">
-         <img src="./assets/phone.svg" alt="phone logo" width="16" height="16">
-         <p class="ml-[10px] ext-grey-600">+7(900)232-32-32</p>
-       </div>
-       <p class="ml-[20px] text-grey-600">Избранное</p>
-       <button class="flex items-center ml-[20px] bg-orange-500 pl-[17px] p-[7px] rounded-[13px] text-white hover:bg-orange-600">
-         Корзина
-         <div class="bg-white rounded-[10px] pl-[14px] pr-[13px] p-[9px] text-grey-800 ml-[15px] ">{{count}}</div>
-       </button>
-     </div>
-   </nav>
- </header>
+<header class="flex items-center ml-[107px] mt-[61px] mr-[107px]">
+  <img src="./assets/cosinuts-logo.png" alt="logo" width="155" height="53" />
+  <nav class="ml-[27px] flex w-screen">
+    <ul class="flex items-center">
+      <li
+        class="text-[18px] text-grey hover:text-orange cursor-pointer"
+        routerLinkActive="text-black"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/">Главная</a>
+      </li>
+      <li
+        class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer"
+        routerLinkActive="text-black">
+        <a routerLink="catalog">Каталог</a>
+      </li>
+      <li
+        class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer"
+        routerLinkActive="text-black">
+        <a routerLink="about">О нас</a>
+      </li>
+      <li
+        class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer"
+        routerLinkActive="text-black">
+        <a routerLink="delivery"> О доставке </a>
+      </li>
+      <li
+        class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer"
+        routerLinkActive="text-black">
+        <a routerLink="shops"> Магазины </a>
+      </li>
+      <li
+        class="ml-[10px] text-grey text-[18px] hover:text-orange cursor-pointer"
+        routerLinkActive="text-black">
+        <a routerLink="contacts"> Контакты </a>
+      </li>
+    </ul>
+    <div class="ml-auto flex items-center">
+      <div class="flex items-center">
+        <img src="./assets/phone.svg" alt="phone logo" width="16" height="16" />
+        <p class="ml-[10px] ext-grey-600">+7(900)232-32-32</p>
+      </div>
+      <p class="ml-[20px] text-grey-600">Избранное</p>
+      <button
+        class="flex items-center ml-[20px] bg-orange-500 pl-[17px] p-[7px] rounded-[13px] text-white hover:bg-orange-600">
+        Корзина
+        <div
+          class="bg-white rounded-[10px] pl-[14px] pr-[13px] p-[9px] text-grey-800 ml-[15px]">
+          {{ count }}
+        </div>
+      </button>
+    </div>
+  </nav>
+</header>
