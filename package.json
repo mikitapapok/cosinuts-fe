@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "ng deploy --base-href=https://mikitapapok.github.io/cosinuts-fe/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -27,6 +28,7 @@
     "@angular/cli": "~14.2.4",
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
+    "angular-cli-ghpages": "^1.0.5",
     "autoprefixer": "^10.4.13",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
