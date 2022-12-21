@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { INavigation } from '../interfaces/interfaces';
+import { navigationRoutes } from '../constants/contstans';
 
 @Component({
   selector: 'app-header',
@@ -6,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   count: number = 0;
+  navigation?: INavigation[];
+
+  constructor() {
+    this.navigation = navigationRoutes;
+    console.log(this.navigation);
+  }
 }
