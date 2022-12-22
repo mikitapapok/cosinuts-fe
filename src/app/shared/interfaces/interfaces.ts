@@ -3,3 +3,8 @@ export interface INavigation {
   title: string;
   exact: boolean;
 }
+
+export interface ICategories {
+  type: string;
+  title: string;
+}
