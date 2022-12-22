@@ -12,6 +12,5 @@ export class HeaderComponent {
 
   constructor() {
     this.navigation = navigationRoutes;
-    console.log(this.navigation);
   }
 }

@@ -2,6 +2,14 @@
   <app-page-title>{{ title }}</app-page-title>
   <section class="flex items-start w-[100%] mt-[37px]">
     <app-categories></app-categories>
-    <div class="w-[1283px] ml-[59px]"></div>
+    <div class="">
+      <ul class="grid grid-cols-3 gap-x-[26px] gap-y-[55px]">
+        <ng-container *ngFor="let item of productList">
+          <li class="ml-[15px]">
+            <app-product-item [product]="item"></app-product-item>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
   </section>
 </div>

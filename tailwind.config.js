@@ -19,6 +19,7 @@ module.exports = {
         orange: '#FEB302',
         'orange-500': 'rgba(254, 179, 2, 0.45)',
         'orange-600': ' rgba(254, 179, 2, 0.75)',
+        'orange-800': '#DA5C5C',
         grey: 'rgba(0, 0, 0, 0.35)',
         'grey-800': '#444444',
         'grey-600': '#606060',
