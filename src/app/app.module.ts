@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
         return {
           cache: new InMemoryCache({ addTypename: false }),
           link: httpLink.create({
-            uri: 'http://localhost:5000/graphql',
+            uri: 'https://cosinuts.herokuapp.com/graphql',
           }),
         };
       },
