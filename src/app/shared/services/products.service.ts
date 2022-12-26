@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { IAllProduct } from '../interfaces/interfaces';
+import { IAllProduct, IProducts } from '../interfaces/interfaces';
+import { ProductTypesType } from '../constants/contstans';
+
+interface IGetProducts {
+  getProducts: IProducts[];
+}
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -22,6 +27,25 @@ export class ProductsService {
         }
       `,
       notifyOnNetworkStatusChange: true,
+    }).valueChanges;
+  }
+
+  fetchProductsByType(typeOfProduct: string) {
+    return this.apollo.watchQuery<IGetProducts>({
+      query: gql`
+        query ($productType: String) {
+          getProducts(type: $productType) {
+            id
+            title
+            description
+            type
+            src
+            cost
+            salePrice
+          }
+        }
+      `,
+      variables: { productType: typeOfProduct },
     }).valueChanges;
   }
 }

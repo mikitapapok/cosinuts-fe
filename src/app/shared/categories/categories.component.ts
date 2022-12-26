@@ -27,7 +27,6 @@ export class CategoriesComponent implements OnDestroy {
     this.productTypeSubscription = this.store
       .select('productType')
       .subscribe(({ productType }) => (this.productType = productType));
-    console.log('categories current type', this.productType);
   }
 
   productTypeCheck(typeOfProduct: ProductTypesType): boolean {

@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { PageTitles, ProductTypesType } from '../../shared/constants/contstans';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../shared/services/products.service';
@@ -15,6 +21,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   getProducts?: Subscription;
   loading: boolean = false;
   productType?: Subscription;
+  type?: string;
 
   constructor(
     private productsService: ProductsService,
@@ -24,15 +31,16 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loading = true;
-    this.getProducts = this.productsService.fetchProducts().subscribe(value => {
-      this.productList = value.data?.getAllProducts;
-      this.loading = false;
-    });
     this.productType = this.store
       .select(StoreSelectors.productType)
       .subscribe(({ productType }) => {
-        console.log(productType);
+        this.loading = true;
+        this.getProducts = this.productsService
+          .fetchProductsByType(productType)
+          .subscribe(value => {
+            this.productList = value.data?.getProducts;
+            this.loading = false;
+          });
       });
   }
 
