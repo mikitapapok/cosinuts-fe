@@ -14,12 +14,30 @@ export enum PageTitles {
   Categories = 'Категории',
 }
 
+export enum ProductTypes {
+  DriedFruits = 'driedFruits',
+  DriedBerries = 'driedBerries',
+  CandiedFruits = 'candiedFruits',
+  EasternSweets = 'easternSweets',
+  Snacks = 'snacks',
+  Grocery = 'grocery',
+  SeedsAndBeans = 'seedsAndBeans',
+}
+
+export type ProductTypesType =
+  | ProductTypes.DriedFruits
+  | ProductTypes.DriedBerries
+  | ProductTypes.CandiedFruits
+  | ProductTypes.EasternSweets
+  | ProductTypes.Grocery
+  | ProductTypes.Snacks
+  | ProductTypes.SeedsAndBeans;
 export const categoriesList: ICategories[] = [
-  { type: 'driedFruits', title: 'Сухофрукты' },
-  { type: 'driedBerries', title: 'Ягоды сушеные' },
-  { type: 'CandiedFruits', title: 'Цукаты' },
-  { type: 'easternSweets', title: 'Восточные сладости' },
-  { type: ' snacks', title: 'Снеки' },
-  { type: 'grocery', title: 'Бакалея' },
-  { type: 'seedsAndBeans', title: 'Семена и бобовые' },
+  { type: ProductTypes.DriedFruits, title: 'Сухофрукты' },
+  { type: ProductTypes.DriedBerries, title: 'Ягоды сушеные' },
+  { type: ProductTypes.CandiedFruits, title: 'Цукаты' },
+  { type: ProductTypes.EasternSweets, title: 'Восточные сладости' },
+  { type: ProductTypes.Snacks, title: 'Снеки' },
+  { type: ProductTypes.Grocery, title: 'Бакалея' },
+  { type: ProductTypes.SeedsAndBeans, title: 'Семена и бобовые' },
 ];

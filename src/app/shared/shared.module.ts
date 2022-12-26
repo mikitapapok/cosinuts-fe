@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { CategoriesComponent } from './categories/categories.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ToFixedPipe } from './pipes/to-fixed.pipe';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   exports: [
@@ -16,8 +17,9 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
+    SpinnerComponent,
   ],
-  imports: [RouterLinkWithHref, RouterLinkActive, NgForOf, NgIf],
+  imports: [RouterLinkWithHref, RouterLinkActive, NgForOf, NgIf, NgClass],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -25,6 +27,7 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
+    SpinnerComponent,
   ],
 })
 export class SharedModule {}

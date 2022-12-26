@@ -3,7 +3,14 @@
   <h3 class="text-m font-xl">{{ title }}</h3>
   <ul class="flex flex-col">
     <ng-container *ngFor="let categoryItem of categoriesList">
-      <li class="mt-[26px] cursor-pointer text-s hover:text-orange">
+      <li
+        class="mt-[26px] cursor-pointer text-s hover:text-orange"
+        [ngClass]="
+          productTypeCheck(categoryItem.type)
+            ? 'text-white rounded-[15px] p-[12px] pb-[15px] pl-[13px] bg-orange'
+            : ''
+        "
+        (click)="changeProductType(categoryItem.type)">
         {{ categoryItem.title }}
       </li>
     </ng-container>

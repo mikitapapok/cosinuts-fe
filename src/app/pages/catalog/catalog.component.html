@@ -2,7 +2,12 @@
   <app-page-title>{{ title }}</app-page-title>
   <section class="flex items-start w-[100%] mt-[37px]">
     <app-categories></app-categories>
-    <div class="">
+
+    <div class="min-w-[1080px] ml-[26px] flex justify-center" *ngIf="loading">
+      <app-spiner></app-spiner>
+    </div>
+
+    <div class="min-w-[1080px]" *ngIf="!loading">
       <ul class="grid grid-cols-3 gap-x-[26px] gap-y-[55px]">
         <ng-container *ngFor="let item of productList">
           <li class="ml-[15px]">

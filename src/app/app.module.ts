@@ -10,6 +10,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { productTypeReducer } from './store/product-type-store/product-type.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +22,7 @@ import { CommonModule } from '@angular/common';
     ApolloModule,
     HttpClientModule,
     CommonModule,
+    StoreModule.forRoot({ productType: productTypeReducer }),
   ],
   providers: [
     {

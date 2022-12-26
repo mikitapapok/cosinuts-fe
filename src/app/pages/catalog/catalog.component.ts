@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PageTitles } from '../../shared/constants/contstans';
+import { PageTitles, ProductTypesType } from '../../shared/constants/contstans';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../shared/services/products.service';
-import { IProducts } from '../../shared/interfaces/interfaces';
+import { IProducts, StoreSelectors } from '../../shared/interfaces/interfaces';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-catalog',
@@ -12,18 +13,31 @@ export class CatalogComponent implements OnInit, OnDestroy {
   title?: string;
   productList?: IProducts[];
   getProducts?: Subscription;
-  constructor(private productsService: ProductsService) {
+  loading: boolean = false;
+  productType?: Subscription;
+
+  constructor(
+    private productsService: ProductsService,
+    private store: Store<{ productType: { productType: ProductTypesType } }>
+  ) {
     this.title = PageTitles.Catalog;
   }
 
   ngOnInit() {
+    this.loading = true;
     this.getProducts = this.productsService.fetchProducts().subscribe(value => {
       this.productList = value.data?.getAllProducts;
+      this.loading = false;
     });
-    console.log(this.productList);
+    this.productType = this.store
+      .select(StoreSelectors.productType)
+      .subscribe(({ productType }) => {
+        console.log(productType);
+      });
   }
 
   ngOnDestroy() {
     this.getProducts?.unsubscribe();
+    this.productType?.unsubscribe();
   }
 }

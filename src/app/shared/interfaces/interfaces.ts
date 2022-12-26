@@ -1,3 +1,5 @@
+import { ProductTypesType } from '../constants/contstans';
+
 export interface INavigation {
   path: string;
   title: string;
@@ -5,9 +7,14 @@ export interface INavigation {
 }
 
 export interface ICategories {
-  type: string;
+  type: ProductTypesType;
   title: string;
 }
+
+export enum StoreSelectors {
+  productType = 'productType',
+}
+
 export interface IProducts {
   id: any;
   title: string;
@@ -17,6 +24,7 @@ export interface IProducts {
   cost: number;
   salePrice: number;
 }
+
 export interface IAllProduct {
   getAllProducts: IProducts[];
 }

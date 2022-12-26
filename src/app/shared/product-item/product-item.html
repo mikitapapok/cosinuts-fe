@@ -1,8 +1,12 @@
 <div
   class="rounded-[26px] p-[15px] pb-[29px] bg-grey-200 flex flex-col items-start">
-  <img [src]="product?.src" alt="" class="rounded-[25px]" width="280" />
+  <img
+    [src]="product?.src"
+    alt=""
+    class="rounded-[25px] min-h-[288px]"
+    width="280" />
   <h3 class="text-m font-xl mt-[22px]">{{ product?.title }}</h3>
-  <p class="w-[291px]">{{ product?.description }}</p>
+  <p class="w-[291px] min-h-[48px]">{{ product?.description }}</p>
   <ng-container *ngIf="product?.salePrice" class="flex">
     <div class="flex">
       <span class="text-orange-800 font-xl"

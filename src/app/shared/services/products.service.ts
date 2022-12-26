@@ -21,6 +21,7 @@ export class ProductsService {
           }
         }
       `,
+      notifyOnNetworkStatusChange: true,
     }).valueChanges;
   }
 }
