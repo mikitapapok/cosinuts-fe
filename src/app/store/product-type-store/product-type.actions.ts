@@ -1,9 +1,6 @@
-import { Action } from '@ngrx/store';
-import { CHANGE_PRODUCT_TYPE } from '../action-types/action-types';
-import { ProductTypesType } from '../../shared/constants/contstans';
+import {createAction, props} from "@ngrx/store";
+import {ProductTypesType} from "../../shared/constants/contstans";
 
-export class ChangeProductType implements Action {
-  readonly type = CHANGE_PRODUCT_TYPE;
+export const changeTypeAction= createAction('[ Categories] ChangeProductType',
+  props<{productType: ProductTypesType}>())
 
-  constructor(public payload: ProductTypesType) {}
-}

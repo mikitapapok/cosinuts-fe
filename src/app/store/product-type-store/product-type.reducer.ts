@@ -2,8 +2,9 @@ import {
   ProductTypes,
   ProductTypesType,
 } from '../../shared/constants/contstans';
-import { ChangeProductType } from './product-type.actions';
-import { CHANGE_PRODUCT_TYPE } from '../action-types/action-types';
+import { changeTypeAction} from './product-type.actions';
+
+import {createReducer, on} from "@ngrx/store";
 
 interface State {
   productType: ProductTypesType;
@@ -11,14 +12,5 @@ interface State {
 
 const initState: State = { productType: ProductTypes.DriedFruits };
 
-export function productTypeReducer<State, Action>(
-  state = initState,
-  action: ChangeProductType
-) {
-  switch (action.type) {
-    case CHANGE_PRODUCT_TYPE:
-      return { ...state, productType: action.payload };
-    default:
-      return state;
-  }
-}
+export const productTypeReducer=createReducer( initState,
+   on(changeTypeAction,(state,{productType})=>({productType: productType})))
