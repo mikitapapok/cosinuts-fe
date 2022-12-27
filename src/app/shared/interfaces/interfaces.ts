@@ -28,3 +28,6 @@ export interface IProducts {
 export interface IAllProduct {
   getAllProducts: IProducts[];
 }
+export interface IGetProducts {
+  getProducts: { count: number; products: IProducts[] };
+}

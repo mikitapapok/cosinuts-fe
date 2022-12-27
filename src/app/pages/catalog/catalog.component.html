@@ -8,7 +8,10 @@
     </div>
 
     <div class="min-w-[1080px]" *ngIf="!loading">
-      <ul class="grid grid-cols-3 gap-x-[26px] gap-y-[55px]">
+      <app-pagination-nav [amountOfPage]="maxPage" [currentPage]="currentPage"
+       (pageChanges)="getProductsFromCurrentPage($event)" (onPrevPage)="prevPage()"
+        (onNextPage)="nextPage()"></app-pagination-nav>
+      <ul class="grid grid-cols-3 gap-x-[26px] gap-y-[55px] mt-[85px]">
         <ng-container *ngFor="let item of productList">
           <li class="ml-[15px]">
             <app-product-item [product]="item"></app-product-item>
