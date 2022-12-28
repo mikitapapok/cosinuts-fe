@@ -13,7 +13,7 @@
         (onNextPage)="nextPage()"></app-pagination-nav>
       <ul class="grid grid-cols-3 gap-x-[26px] gap-y-[55px] mt-[85px]">
         <ng-container *ngFor="let item of productList">
-          <li class="ml-[15px]">
+          <li class="ml-[15px]" >
             <app-product-item [product]="item"></app-product-item>
           </li>
         </ng-container>

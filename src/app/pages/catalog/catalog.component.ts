@@ -21,7 +21,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
   productsQuery?: Subscription;
   type: string = ProductTypes.DriedFruits;
-  currentPage: number = 1;
+  currentPage: number = 0;
   maxPage: number = 0;
 
   constructor(
@@ -31,7 +31,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     this.title = PageTitles.Catalog;
   }
   getProductsObjFromQuery(newObj: { count: number; products: IProducts[] }) {
-    this.maxPage = Math.floor(newObj.count / 6);
+    this.maxPage = Math.ceil(newObj.count / 6);
     this.productList = newObj.products;
 
     this.loading = false;
@@ -43,11 +43,10 @@ export class CatalogComponent implements OnInit, OnDestroy {
         switchMap(({ productType }) => {
           this.loading = true;
           this.type = productType;
-          this.maxPage = 0;
-          this.currentPage = 1;
+          this.currentPage = 0;
           return this.productsService.getProductsWithRefetch(
             this.type,
-            this.currentPage - 1
+            this.currentPage
           );
         }),
         tap(newObj => {
@@ -70,7 +69,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   prevPage() {
-    if (this.currentPage > 1) {
+    if (this.currentPage > 0) {
       this.currentPage -= 1;
       this.loading = true;
       this.productsQuery = this.productsService
@@ -89,7 +88,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
       this.loading = true;
       this.currentPage += 1;
       this.productsQuery = this.productsService
-        .getProductsWithRefetch(this.type, this.currentPage - 1)
+        .getProductsWithRefetch(this.type, this.currentPage)
         .pipe(
           tap(newObj => {
             this.getProductsObjFromQuery(newObj);
@@ -98,6 +97,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
         .subscribe();
     }
   }
+
   ngOnDestroy() {
     this.productsQuery?.unsubscribe();
     this.productType?.unsubscribe();

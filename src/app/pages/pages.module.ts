@@ -8,14 +8,23 @@ import { ShopListComponent } from './shop-list/shop-list.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'catalog', component: CatalogComponent },
+  {
+    path: 'catalog',
+    component: CatalogComponent,
+    children: [{ path: ':id', component: ProductComponent }],
+  },
   { path: 'contacts', component: ContactsComponent },
   { path: 'shops', component: ShopListComponent },
   { path: 'delivery', component: DeliveryComponent },
+  {
+    path: '**',
+    redirectTo: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+  },
 ];
 @NgModule({
   declarations: [
@@ -25,6 +34,7 @@ const routes: Routes = [
     ContactsComponent,
     ShopListComponent,
     DeliveryComponent,
+    ProductComponent,
   ],
   imports: [CommonModule, RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule, MainPageComponent],
