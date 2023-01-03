@@ -7,8 +7,7 @@ import {
 import { ICategories } from '../interfaces/interfaces';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import {changeTypeAction} from "../../store/product-type-store/product-type.actions";
-
+import { changeTypeAction } from '../../store/product-type-store/product-type.actions';
 
 @Component({
   selector: 'app-categories',
@@ -21,7 +20,9 @@ export class CategoriesComponent implements OnDestroy {
   productType?: ProductTypesType;
 
   constructor(
-    private store: Store<{ productType: { productType: ProductTypesType } }>
+    private store: Store<{
+      productType: { productType: ProductTypesType };
+    }>
   ) {
     this.title = PageTitles.Categories;
     this.categoriesList = categoriesList;
@@ -39,6 +40,6 @@ export class CategoriesComponent implements OnDestroy {
   }
 
   changeProductType(typeOfProduct: ProductTypesType): void {
-    this.store.dispatch( changeTypeAction({productType: typeOfProduct}));
+    this.store.dispatch(changeTypeAction({ productType: typeOfProduct }));
   }
 }

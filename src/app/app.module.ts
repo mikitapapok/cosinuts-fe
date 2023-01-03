@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { productTypeReducer } from './store/product-type-store/product-type.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { combineReducer } from './store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,8 @@ import { productTypeReducer } from './store/product-type-store/product-type.redu
     ApolloModule,
     HttpClientModule,
     CommonModule,
-    StoreModule.forRoot({ productType: productTypeReducer }),
+    StoreModule.forRoot(combineReducer),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     {

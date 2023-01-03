@@ -40,9 +40,4 @@ export class ProductsService {
       })
     );
   }
-  refetch(typeOfProduct: string, offset: number) {
-    this.getProductsWithRefetch(typeOfProduct, offset).pipe(
-      tap(() => this.refetchSubj.next(null))
-    );
-  }
 }

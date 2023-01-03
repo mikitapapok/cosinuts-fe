@@ -1,6 +1,7 @@
-import {createAction, props} from "@ngrx/store";
-import {ProductTypesType} from "../../shared/constants/contstans";
+import { createAction, props } from '@ngrx/store';
+import { ProductTypesType } from '../../shared/constants/contstans';
 
-export const changeTypeAction= createAction('[ Categories] ChangeProductType',
-  props<{productType: ProductTypesType}>())
-
+export const changeTypeAction = createAction(
+  '[ Categories] ChangeProductType',
+  props<{ productType: ProductTypesType }>()
+);
