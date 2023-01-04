@@ -3,17 +3,20 @@
   <section class="flex items-start w-[100%] mt-[37px]">
     <app-categories></app-categories>
 
-    <div class="min-w-[1080px] ml-[26px] flex justify-center" *ngIf="loading">
+    <div
+      class="min-w-[1080px] ml-[26px] flex justify-center"
+      *ngIf="!(productList | async)?.length">
       <app-spiner></app-spiner>
     </div>
 
-    <div class="min-w-[1080px]" *ngIf="!loading">
-      <app-pagination-nav [amountOfPage]="maxPage" [currentPage]="currentPage"
-       (pageChanges)="getProductsFromCurrentPage($event)" (onPrevPage)="prevPage()"
-        (onNextPage)="nextPage()"></app-pagination-nav>
+    <div class="min-w-[1080px]">
+      <app-pagination-nav
+        (pageChanges)="getProductsFromCurrentPage($event)"
+        (showPrevPage)="prevPage()"
+        (showNextPage)="nextPage($event)"></app-pagination-nav>
       <ul class="grid grid-cols-3 gap-x-[26px] gap-y-[55px] mt-[85px]">
-        <ng-container *ngFor="let item of productList">
-          <li class="ml-[15px]" >
+        <ng-container *ngFor="let item of productList | async">
+          <li class="ml-[15px]">
             <app-product-item [product]="item"></app-product-item>
           </li>
         </ng-container>

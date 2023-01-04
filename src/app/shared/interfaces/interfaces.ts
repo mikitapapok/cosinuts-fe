@@ -31,3 +31,12 @@ export interface IAllProduct {
 export interface IGetProducts {
   getProducts: { count: number; products: IProducts[] };
 }
+export interface ProductStateInterface {
+  count: number[];
+  products: IProducts[];
+  currentPage: number;
+}
+export interface AppStateInterface {
+  productType: { productType: ProductTypesType };
+  products: ProductStateInterface;
+}

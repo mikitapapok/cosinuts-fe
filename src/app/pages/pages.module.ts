@@ -9,6 +9,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product/product.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -38,7 +39,12 @@ const routes: Routes = [
     DeliveryComponent,
     ProductComponent,
   ],
-  imports: [CommonModule, RouterModule.forRoot(routes), SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes),
+    SharedModule,
+    FormsModule,
+  ],
   exports: [RouterModule, MainPageComponent],
 })
 export class PagesModule {}

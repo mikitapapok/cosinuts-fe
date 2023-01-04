@@ -14,6 +14,9 @@ import { StoreModule } from '@ngrx/store';
 import { productTypeReducer } from './store/product-type-store/product-type.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { combineReducer } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { ProductsEffect } from './store/effects/products.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +28,11 @@ import { combineReducer } from './store';
     HttpClientModule,
     CommonModule,
     StoreModule.forRoot(combineReducer),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ProductsEffect]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     {

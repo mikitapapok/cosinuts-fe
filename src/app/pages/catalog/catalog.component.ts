@@ -1,21 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  PageTitles,
-  ProductTypes,
-  ProductTypesType,
-} from '../../shared/constants/contstans';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { PageTitles, ProductTypes } from '../../shared/constants/contstans';
+import { Observable, Subscription } from 'rxjs';
 import { ProductsService } from '../../shared/services/products.service';
-import { IProducts, StoreSelectors } from '../../shared/interfaces/interfaces';
-import { Store } from '@ngrx/store';
-
+import {
+  AppStateInterface,
+  IProducts,
+} from '../../shared/interfaces/interfaces';
+import { select, Store } from '@ngrx/store';
+import {
+  maxPageSelector,
+  productsSelector,
+} from '../../store/products-store/products.reducer';
+import { addProductsAction } from '../../store/products-store/products.actions';
+import { productTypeSelector } from '../../store/product-type-store/product-type.reducer';
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
 })
-export class CatalogComponent implements OnInit, OnDestroy {
+export class CatalogComponent implements OnInit {
   title?: string;
-  productList?: IProducts[];
+  productList?: Observable<IProducts[]>;
   loading: boolean = false;
   productType?: Subscription;
 
@@ -23,83 +27,40 @@ export class CatalogComponent implements OnInit, OnDestroy {
   type: string = ProductTypes.DriedFruits;
   currentPage: number = 0;
   maxPage: number = 0;
-
   constructor(
     private productsService: ProductsService,
-    private store: Store<{ productType: { productType: ProductTypesType } }>
+    private store: Store<AppStateInterface>
   ) {
     this.title = PageTitles.Catalog;
   }
-  getProductsObjFromQuery(newObj: { count: number; products: IProducts[] }) {
-    this.maxPage = Math.ceil(newObj.count / 6);
-    this.productList = newObj.products;
-
-    this.loading = false;
-  }
   ngOnInit() {
-    this.productType = this.store
-      .select(StoreSelectors.productType)
-      .pipe(
-        switchMap(({ productType }) => {
-          this.loading = true;
-          this.type = productType;
-          this.currentPage = 0;
-          return this.productsService.getProductsWithRefetch(
-            this.type,
-            this.currentPage
-          );
-        }),
-        tap(newObj => {
-          this.getProductsObjFromQuery(newObj);
-        })
-      )
-      .subscribe();
+    this.productList = this.store.pipe(select(productsSelector));
+    this.store.pipe(select(maxPageSelector));
+    this.store.select(productTypeSelector).subscribe(() => {
+      this.currentPage = 0;
+    });
   }
+
   getProductsFromCurrentPage(pageNumber: number) {
     this.currentPage = pageNumber;
-    this.loading = true;
-    this.productsQuery = this.productsService
-      .getProductsWithRefetch(this.type, this.currentPage)
-      .pipe(
-        tap(newObj => {
-          this.getProductsObjFromQuery(newObj);
-        })
-      )
-      .subscribe();
+    this.store.dispatch(addProductsAction({ offset: pageNumber }));
   }
 
   prevPage() {
     if (this.currentPage > 0) {
       this.currentPage -= 1;
-      this.loading = true;
-      this.productsQuery = this.productsService
-        .getProductsWithRefetch(this.type, this.currentPage)
-        .pipe(
-          tap(newObj => {
-            this.getProductsObjFromQuery(newObj);
-          })
-        )
-        .subscribe();
+      // this.loading = true;
+      this.store.dispatch(addProductsAction({ offset: this.currentPage }));
     }
   }
 
-  nextPage() {
-    if (this.currentPage < this.maxPage) {
-      this.loading = true;
+  nextPage(maxPage: number) {
+    if (this.currentPage < maxPage - 1) {
       this.currentPage += 1;
-      this.productsQuery = this.productsService
-        .getProductsWithRefetch(this.type, this.currentPage)
-        .pipe(
-          tap(newObj => {
-            this.getProductsObjFromQuery(newObj);
-          })
-        )
-        .subscribe();
-    }
-  }
+      // this.loading = true;
 
-  ngOnDestroy() {
-    this.productsQuery?.unsubscribe();
-    this.productType?.unsubscribe();
+      this.store.dispatch(addProductsAction({ offset: this.currentPage }));
+      // this.productList.pipe(tap(() => (this.loading = false)));
+    }
   }
 }
