@@ -5,11 +5,11 @@
 
     <div
       class="min-w-[1080px] ml-[26px] flex justify-center"
-      *ngIf="!(productList | async)?.length">
+      *ngIf="loading | async">
       <app-spiner></app-spiner>
     </div>
 
-    <div class="min-w-[1080px]">
+    <div class="min-w-[1080px]" *ngIf="(loading | async) === false">
       <app-pagination-nav
         (pageChanges)="getProductsFromCurrentPage($event)"
         (showPrevPage)="prevPage()"

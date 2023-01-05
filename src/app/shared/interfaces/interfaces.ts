@@ -35,6 +35,7 @@ export interface ProductStateInterface {
   count: number[];
   products: IProducts[];
   currentPage: number;
+  loading: boolean;
 }
 export interface AppStateInterface {
   productType: { productType: ProductTypesType };

@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { IProducts } from '../../shared/interfaces/interfaces';
-import { ProductTypesType } from '../../shared/constants/contstans';
 
 export const addProductsAction = createAction(
   '[Categories] AddProducts',
@@ -15,3 +14,5 @@ export const productsFromQueries = createAction(
 export const changeCurrentPage = createAction(
   '[categories] change current page to 0'
 );
+
+export const runLoadingAction = createAction('[catalog] loading');

@@ -9,7 +9,10 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { changeTypeAction } from '../../store/product-type-store/product-type.actions';
 import { productTypeSelector } from '../../store/product-type-store/product-type.reducer';
-import { addProductsAction } from '../../store/products-store/products.actions';
+import {
+  addProductsAction,
+  runLoadingAction,
+} from '../../store/products-store/products.actions';
 
 @Component({
   selector: 'app-categories',
@@ -32,6 +35,7 @@ export class CategoriesComponent implements OnInit {
 
   changeProductType(typeOfProduct: ProductTypesType): void {
     this.productType = typeOfProduct;
+    this.store.dispatch(runLoadingAction());
     this.store.dispatch(changeTypeAction({ productType: typeOfProduct }));
     this.store.dispatch(addProductsAction({ offset: 0 }));
   }
