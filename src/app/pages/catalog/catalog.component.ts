@@ -10,12 +10,12 @@ import { select, Store } from '@ngrx/store';
 import {
   loadingSelector,
   productsSelector,
-} from '../../store/products-store/products.reducer';
+} from '../../store/products-store/products.selectors';
 import {
   addProductsAction,
   runLoadingAction,
 } from '../../store/products-store/products.actions';
-import { productTypeSelector } from '../../store/product-type-store/product-type.reducer';
+import { productTypeSelector } from '../../store/product-type-store/product-type.selectors';
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',

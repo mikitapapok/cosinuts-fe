@@ -1,13 +1,13 @@
 <div class="flex ml-[26px] items-center">
-  <ng-container *ngIf="(pages | async).length as maxPage">
-    <ng-container *ngIf="(pages | async).length > 1">
+  <ng-container *ngIf="pages | async as maxPage">
+    <ng-container *ngIf="maxPage.length > 1">
       <button
         class="pt-[11px] pb-[10px] pr-[20px] pl-[15px] bg-orange rounded-[15px]"
         (click)="prevPageHandler()">
         <img src="./assets/arrowLeft.svg" alt="" />
       </button>
 
-      <div *ngFor="let page of pages | async">
+      <div *ngFor="let page of maxPage">
         <button
           class="ml-[20px] text-grey hover:text-black text-l"
           [ngClass]="page === (currentPage | async) ? 'text-black' : ''"
@@ -18,7 +18,7 @@
 
       <button
         class="ml-[20px] pt-[11px] pb-[10px] pr-[20px] pl-[15px] bg-orange rounded-[15px]"
-        (click)="nextPageHandler(maxPage)">
+        (click)="nextPageHandler(maxPage.length)">
         <img src="./assets/arrowLeft.svg" class="rotate-180" alt="logo" />
       </button>
     </ng-container>

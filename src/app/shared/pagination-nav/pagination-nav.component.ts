@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppStateInterface } from '../interfaces/interfaces';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   currentPageSelector,
   maxPageSelector,
-} from '../../store/products-store/products.reducer';
+} from '../../store/products-store/products.selectors';
 
 @Component({
   selector: 'app-pagination-nav',

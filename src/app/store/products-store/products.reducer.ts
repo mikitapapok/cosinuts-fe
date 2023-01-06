@@ -1,8 +1,5 @@
-import {
-  AppStateInterface,
-  ProductStateInterface,
-} from '../../shared/interfaces/interfaces';
-import { createReducer, createSelector, on } from '@ngrx/store';
+import { ProductStateInterface } from '../../shared/interfaces/interfaces';
+import { createReducer, on } from '@ngrx/store';
 import * as productActions from './products.actions';
 
 const initState: ProductStateInterface = {
@@ -12,24 +9,6 @@ const initState: ProductStateInterface = {
   loading: false,
 };
 
-export const productsFeature = (state: AppStateInterface) => state.products;
-export const productsSelector = createSelector(
-  productsFeature,
-  (state: ProductStateInterface) => state.products
-);
-export const currentPageSelector = createSelector(
-  productsFeature,
-  (state: ProductStateInterface) => state.currentPage
-);
-export const maxPageSelector = createSelector(
-  productsFeature,
-  (state: ProductStateInterface) => state.count
-);
-
-export const loadingSelector = createSelector(
-  productsFeature,
-  (state: ProductStateInterface) => state.loading
-);
 export const productsReducer = createReducer(
   initState,
   on(

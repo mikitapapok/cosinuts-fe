@@ -3,9 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductsService } from '../../shared/services/products.service';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from '../../shared/interfaces/interfaces';
-import * as ProductActions from '../products-store/products.actions';
+import * as ProductActions from './products.actions';
 import { map, mergeMap, withLatestFrom } from 'rxjs';
-import { productTypeSelector } from '../product-type-store/product-type.reducer';
+import { productTypeSelector } from '../product-type-store/product-type.selectors';
 
 @Injectable()
 export class ProductsEffect {

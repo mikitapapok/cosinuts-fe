@@ -9,7 +9,6 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { ToFixedPipe } from './pipes/to-fixed.pipe';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
-import { ToArrayPipe } from './pipes/toArray.pipe';
 
 @NgModule({
   exports: [
@@ -19,7 +18,6 @@ import { ToArrayPipe } from './pipes/toArray.pipe';
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
-    ToArrayPipe,
     SpinnerComponent,
     PaginationNavComponent,
   ],
@@ -38,7 +36,6 @@ import { ToArrayPipe } from './pipes/toArray.pipe';
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
-    ToArrayPipe,
     SpinnerComponent,
     PaginationNavComponent,
   ],

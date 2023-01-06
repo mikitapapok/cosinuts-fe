@@ -16,7 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { combineReducer } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ProductsEffect } from './store/effects/products.effects';
+import { ProductsEffect } from './store/products-store/products.effects';
 
 @NgModule({
   declarations: [AppComponent],

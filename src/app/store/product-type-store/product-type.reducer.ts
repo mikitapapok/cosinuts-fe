@@ -4,8 +4,7 @@ import {
 } from '../../shared/constants/contstans';
 import { changeTypeAction } from './product-type.actions';
 
-import { createReducer, createSelector, on } from '@ngrx/store';
-import { AppStateInterface } from '../../shared/interfaces/interfaces';
+import { createReducer, on } from '@ngrx/store';
 
 interface State {
   productType: ProductTypesType;
@@ -16,13 +15,6 @@ export interface AppState {
   productType: ProductTypesType;
 }
 
-export const productTypeFeature = (state: AppStateInterface) =>
-  state.productType;
-
-export const productTypeSelector = createSelector(
-  productTypeFeature,
-  (state: AppState) => state.productType
-);
 export const productTypeReducer = createReducer(
   initState,
   on(changeTypeAction, (state, { productType }) => ({

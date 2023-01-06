@@ -8,7 +8,7 @@ import { AppStateInterface, ICategories } from '../interfaces/interfaces';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { changeTypeAction } from '../../store/product-type-store/product-type.actions';
-import { productTypeSelector } from '../../store/product-type-store/product-type.reducer';
+import { productTypeSelector } from '../../store/product-type-store/product-type.selectors';
 import {
   addProductsAction,
   runLoadingAction,
