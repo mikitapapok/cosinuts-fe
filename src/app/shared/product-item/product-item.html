@@ -1,0 +1,71 @@
+<div
+  class="rounded-[26px] p-[15px] pb-[29px] bg-grey-200 flex flex-col items-start">
+  <img
+    [src]="product?.src"
+    alt=""
+    class="rounded-[25px] min-h-[288px]"
+    width="280" />
+  <h3 class="text-m font-xl mt-[22px]">{{ product?.title }}</h3>
+  <p class="w-[291px] min-h-[48px]">{{ product?.description }}</p>
+  <ng-container *ngIf="product?.salePrice" class="flex">
+    <div class="flex">
+      <span class="text-orange-800 font-xl"
+        >От {{ product?.salePrice | toFixed }} P</span
+      >
+      <span class="text-grey line-through decoration-grey font-xl ml-[21px]"
+        >От {{ product?.cost | toFixed }} P</span
+      >
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!product?.salePrice">
+    <span class="text-grey decoration-grey font-xl"
+      >От {{ product?.cost | toFixed }} P</span
+    >
+  </ng-container>
+  <div class="flex mt-[30px]">
+    <button class="py-[18px] px-[14px]">
+      <svg
+        width="28"
+        height="20"
+        viewBox="0 0 28 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M17.7748 12.5461H27.1455V15.2197H17.7748V19.23L12.4411 13.8829L17.7748 8.53583V12.5461Z"
+          fill="#AAAAAA" />
+        <path
+          d="M9.78056 4.5255V0.515198L15.1143 5.86227L9.78056 11.2093V7.19903H0.409816V4.5255H9.78056Z"
+          fill="#AAAAAA" />
+      </svg>
+    </button>
+    <button class="ml-[] p-[17px]">
+      <svg
+        width="20"
+        height="21"
+        viewBox="0 0 20 21"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M19.4518 18.9852L14.3897 14.0041C15.7153 12.5639 16.5298 10.6592 16.5298 8.56333C16.5292 4.07979 12.8361 0.445679 8.28021 0.445679C3.72428 0.445679 0.03125 4.07979 0.03125 8.56333C0.03125 13.0469 3.72428 16.681 8.28021 16.681C10.2487 16.681 12.0541 16.0001 13.4723 14.8682L18.554 19.869C18.8017 20.1129 19.2036 20.1129 19.4513 19.869C19.6994 19.6251 19.6994 19.2292 19.4518 18.9852ZM8.28021 15.432C4.4254 15.432 1.30047 12.3568 1.30047 8.56333C1.30047 4.76984 4.4254 1.69463 8.28021 1.69463C12.1351 1.69463 15.26 4.76984 15.26 8.56333C15.26 12.3568 12.1351 15.432 8.28021 15.432Z"
+          fill="#AAAAAA" />
+      </svg>
+    </button>
+    <button class="px-[14px] pt-[16px] pb-[15px]">
+      <svg
+        width="28"
+        height="25"
+        viewBox="0 0 28 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M25.0298 2.90936C23.6458 1.39088 21.7468 0.554565 19.6821 0.554565C18.1389 0.554565 16.7255 1.04814 15.4812 2.02146C14.8534 2.51277 14.2845 3.11385 13.7829 3.81542C13.2815 3.11406 12.7124 2.51277 12.0844 2.02146C10.8403 1.04814 9.42697 0.554565 7.88368 0.554565C5.81902 0.554565 3.91978 1.39088 2.53579 2.90936C1.16833 4.4101 0.415039 6.46033 0.415039 8.68266C0.415039 10.97 1.25767 13.0638 3.06675 15.272C4.68511 17.2474 7.01106 19.2526 9.70459 21.5746C10.6243 22.3676 11.6669 23.2664 12.7494 24.2239C13.0353 24.4773 13.4023 24.6167 13.7829 24.6167C14.1633 24.6167 14.5305 24.4773 14.8161 24.2243C15.8986 23.2666 16.9417 22.3674 17.8619 21.574C20.555 19.2524 22.8809 17.2474 24.4993 15.2718C26.3084 13.0638 27.1508 10.97 27.1508 8.68245C27.1508 6.46033 26.3975 4.4101 25.0298 2.90936Z"
+          fill="none"
+          stroke="#AAAAAA" />
+      </svg>
+    </button>
+    <button
+      class="py-[15px] px-[18px] bg-orange rounded-[13px] text-m whitespace-nowrap">
+      В корзину
+    </button>
+  </div>
+</div>

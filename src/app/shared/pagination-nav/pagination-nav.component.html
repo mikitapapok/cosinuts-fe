@@ -1,0 +1,20 @@
+<div class="flex ml-[26px] items-center">
+  <button
+    class="pt-[11px] pb-[10px] pr-[20px] pl-[15px] bg-orange rounded-[15px]"
+    (click)="prevPageHandler()">
+    <img src="./assets/arrowLeft.svg" alt="" />
+  </button>
+  <div *ngFor="let page of pages; let i = index" [attr.data-index]="i">
+    <button
+      class="ml-[20px] text-grey hover:text-black text-l"
+      [ngClass]="i + 1 === currentPage ? 'text-black' : ''"
+      (click)="onChangePage(i + 1)">
+      {{ i + 1 }}
+    </button>
+  </div>
+  <button
+    class="ml-[20px] pt-[11px] pb-[10px] pr-[20px] pl-[15px] bg-orange rounded-[15px]"
+    (click)="nextPageHandler()">
+    <img src="./assets/arrowLeft.svg" class="rotate-180" alt="logo" />
+  </button>
+</div>

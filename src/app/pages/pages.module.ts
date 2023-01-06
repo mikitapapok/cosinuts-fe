@@ -6,6 +6,8 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { DeliveryComponent } from './delivery/delivery.component';
+import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -24,7 +26,7 @@ const routes: Routes = [
     ShopListComponent,
     DeliveryComponent,
   ],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [CommonModule, RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule, MainPageComponent],
 })
 export class PagesModule {}
