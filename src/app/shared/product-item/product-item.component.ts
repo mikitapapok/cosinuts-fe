@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class ProductItemComponent {
   @Input() product?: IProducts;
   constructor(private router: Router) {}
-  goToProductPageHandler(id: string) {
+  goToProductPageHandler(id?: string) {
     this.router.navigate(['/catalog', id]);
   }
 }

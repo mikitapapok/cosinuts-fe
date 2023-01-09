@@ -11,7 +11,6 @@ import { InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { productTypeReducer } from './store/product-type-store/product-type.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { combineReducer } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';

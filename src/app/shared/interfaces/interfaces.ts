@@ -16,7 +16,7 @@ export enum StoreSelectors {
 }
 
 export interface IProducts {
-  id: any;
+  id: string;
   title: string;
   description: string;
   src: string;

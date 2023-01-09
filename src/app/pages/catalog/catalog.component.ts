@@ -6,7 +6,7 @@ import {
   AppStateInterface,
   IProducts,
 } from '../../shared/interfaces/interfaces';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import {
   loadingSelector,
   productsSelector,
@@ -22,10 +22,8 @@ import { productTypeSelector } from '../../store/product-type-store/product-type
 })
 export class CatalogComponent implements OnInit, OnDestroy {
   title?: string;
-  productList?: Observable<IProducts[]>;
-  loading: Observable<boolean> = new Observable<boolean>(subscriber =>
-    subscriber.next(false)
-  );
+  productList$?: Observable<IProducts[]>;
+  loading$?: Observable<boolean>;
   productType?: Subscription;
 
   type: string = ProductTypes.DriedFruits;
@@ -37,8 +35,8 @@ export class CatalogComponent implements OnInit, OnDestroy {
     this.title = PageTitles.Catalog;
   }
   ngOnInit() {
-    this.productList = this.store.pipe(select(productsSelector));
-    this.loading = this.store.pipe(select(loadingSelector));
+    this.productList$ = this.store.select(productsSelector);
+    this.loading$ = this.store.select(loadingSelector);
     this.productType = this.store.select(productTypeSelector).subscribe(() => {
       this.currentPage = 0;
     });

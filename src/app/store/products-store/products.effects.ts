@@ -4,7 +4,7 @@ import { ProductsService } from '../../shared/services/products.service';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from '../../shared/interfaces/interfaces';
 import * as ProductActions from './products.actions';
-import { map, mergeMap, withLatestFrom } from 'rxjs';
+import { map, switchMap, withLatestFrom } from 'rxjs';
 import { productTypeSelector } from '../product-type-store/product-type.selectors';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class ProductsEffect {
     return this.actions.pipe(
       ofType(ProductActions.addProductsAction),
       withLatestFrom(this.store.select(productTypeSelector)),
-      mergeMap(([currentPayload, productType]) =>
+      switchMap(([currentPayload, productType]) =>
         this.productService
           .getProductsWithRefetch(productType, currentPayload.offset)
           .pipe(

@@ -12,7 +12,7 @@ export const productsFromQueries = createAction(
 );
 
 export const changeCurrentPage = createAction(
-  '[categories] change current page to 0'
+  '[Categories] change current page to 0'
 );
 
 export const runLoadingAction = createAction('[catalog] loading');

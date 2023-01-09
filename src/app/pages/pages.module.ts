@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product/product.component';
 import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -26,7 +27,12 @@ const routes: Routes = [
   { path: 'delivery', component: DeliveryComponent },
   {
     path: '**',
-    redirectTo: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    redirectTo: 'not-found',
+    pathMatch: 'full',
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
   },
 ];
 @NgModule({
@@ -38,6 +44,7 @@ const routes: Routes = [
     ShopListComponent,
     DeliveryComponent,
     ProductComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
