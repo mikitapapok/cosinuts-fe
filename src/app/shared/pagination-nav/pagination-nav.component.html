@@ -1,5 +1,5 @@
 <div class="flex ml-[26px] items-center">
-  <ng-container *ngIf="pages | async as maxPage">
+  <ng-container *ngIf="pages$ | async as maxPage">
     <ng-container *ngIf="maxPage.length > 1">
       <button
         class="pt-[11px] pb-[10px] pr-[20px] pl-[15px] bg-orange rounded-[15px]"
@@ -10,7 +10,7 @@
       <div *ngFor="let page of maxPage">
         <button
           class="ml-[20px] text-grey hover:text-black text-l"
-          [ngClass]="page === (currentPage | async) ? 'text-black' : ''"
+          [ngClass]="page === (currentPage$ | async) ? 'text-black' : ''"
           (click)="onChangePage(page)">
           {{ page + 1 }}
         </button>

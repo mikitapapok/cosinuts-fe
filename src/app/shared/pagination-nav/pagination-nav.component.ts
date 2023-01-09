@@ -15,10 +15,10 @@ export class PaginationNavComponent implements OnInit {
   @Output() pageChanges = new EventEmitter<number>();
   @Output() showPrevPage = new EventEmitter<void>();
   @Output() showNextPage = new EventEmitter<number>();
-  pages?: Observable<number[]>;
-  currentPage?: Observable<number>;
+  pages$?: Observable<number[]>;
+  currentPage$?: Observable<number>;
   ngOnInit() {
-    this.pages = this.store.pipe(
+    this.pages$ = this.store$.pipe(
       select(maxPageSelector),
       map(arr => {
         const newArr = [];
@@ -28,7 +28,7 @@ export class PaginationNavComponent implements OnInit {
         return newArr;
       })
     );
-    this.currentPage = this.store.pipe(select(currentPageSelector));
+    this.currentPage$ = this.store$.pipe(select(currentPageSelector));
   }
 
   onChangePage(page: number) {
@@ -42,5 +42,5 @@ export class PaginationNavComponent implements OnInit {
     console.log(maxPage);
     this.showNextPage.emit(maxPage);
   }
-  constructor(private store: Store<AppStateInterface>) {}
+  constructor(private store$: Store<AppStateInterface>) {}
 }

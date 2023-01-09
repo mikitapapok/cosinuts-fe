@@ -21,7 +21,7 @@ import {
 export class CategoriesComponent implements OnInit {
   title?: string;
   categoriesList?: ICategories[];
-  productTypeSubscription?: Observable<string>;
+  productTypeSubscription$?: Observable<string>;
   productType?: ProductTypesType;
 
   constructor(private store: Store<AppStateInterface>) {
@@ -29,7 +29,9 @@ export class CategoriesComponent implements OnInit {
     this.categoriesList = categoriesList;
   }
   ngOnInit() {
-    this.productTypeSubscription = this.store.pipe(select(productTypeSelector));
+    this.productTypeSubscription$ = this.store.pipe(
+      select(productTypeSelector)
+    );
     this.store.dispatch(addProductsAction({ offset: 0 }));
   }
 
