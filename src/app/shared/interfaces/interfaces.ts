@@ -41,3 +41,11 @@ export interface AppStateInterface {
   productType: { productType: ProductTypesType };
   products: ProductStateInterface;
 }
+
+export interface User {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+}

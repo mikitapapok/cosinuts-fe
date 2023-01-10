@@ -11,9 +11,11 @@ import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product/product.component';
 import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
+  { path: '', component: SignupComponent },
   { path: 'about', component: AboutComponent },
   {
     path: 'catalog',
@@ -34,6 +36,10 @@ const routes: Routes = [
     path: 'not-found',
     component: NotFoundComponent,
   },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 ];
 @NgModule({
   declarations: [
@@ -45,6 +51,8 @@ const routes: Routes = [
     DeliveryComponent,
     ProductComponent,
     NotFoundComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     CommonModule,
