@@ -9,12 +9,14 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { ToFixedPipe } from './pipes/to-fixed.pipe';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
+import { AuthFormComponent } from './auth-form/auth-form.component';
 
 @NgModule({
   exports: [
     HeaderComponent,
     FooterComponent,
     CategoriesComponent,
+    AuthFormComponent,
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
@@ -37,6 +39,7 @@ import { PaginationNavComponent } from './pagination-nav/pagination-nav.componen
     ProductItemComponent,
     ToFixedPipe,
     SpinnerComponent,
+    AuthFormComponent,
     PaginationNavComponent,
   ],
 })

@@ -9,7 +9,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product/product.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -26,6 +26,10 @@ const routes: Routes = [
   },
   { path: 'contacts', component: ContactsComponent },
   { path: 'shops', component: ShopListComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   { path: 'delivery', component: DeliveryComponent },
   {
     path: '**',
@@ -35,10 +39,6 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
   },
 ];
 @NgModule({
@@ -57,6 +57,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
     SharedModule,
     FormsModule,
   ],

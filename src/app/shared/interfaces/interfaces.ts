@@ -37,9 +37,14 @@ export interface ProductStateInterface {
   currentPage: number;
   loading: boolean;
 }
+
+export interface AuthStateInterface {
+  email: string;
+}
 export interface AppStateInterface {
   productType: { productType: ProductTypesType };
   products: ProductStateInterface;
+  auth: AuthStateInterface;
 }
 
 export interface User {

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { User } from '../interfaces/interfaces';
 import firebase from 'firebase/compat';
 import * as auth from 'firebase/auth';
+import { defer, from, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -45,14 +46,9 @@ export class AuthService {
       });
   }
   signUp(email: string, password: string) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then(result => {
-        this.setUserData(result.user);
-      })
-      .catch(error => {
-        window.alert(error.message);
-      });
+    return defer(() =>
+      from(this.afAuth.createUserWithEmailAndPassword(email, password))
+    );
   }
   googleAuth() {
     return this.authLogin(new auth.GoogleAuthProvider()).then((res: any) => {

@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthEffects } from './store/auth-store/auth.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     AngularFireDatabaseModule,
     CommonModule,
     StoreModule.forRoot(combineReducer),
-    EffectsModule.forRoot([ProductsEffect]),
+    EffectsModule.forRoot([ProductsEffect, AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
