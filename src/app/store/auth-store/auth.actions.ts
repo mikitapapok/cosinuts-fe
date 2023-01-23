@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { AuthInterface } from '../../shared/interfaces/interfaces';
 
 export const signupAction = createAction(
   '[SignUp] signUp',
@@ -6,3 +7,8 @@ export const signupAction = createAction(
 );
 
 export const noOpAction = createAction('[Effect] NoopAction');
+
+export const loginAction = createAction(
+  '[Login] login',
+  props<{ email: string; password: string }>()
+);

@@ -6,13 +6,15 @@ import {
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/interfaces';
-import firebase from 'firebase/compat';
 import * as auth from 'firebase/auth';
+
 import { defer, from, Observable } from 'rxjs';
+import firebase from 'firebase/compat';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   userData: any;
+
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
@@ -30,31 +32,38 @@ export class AuthService {
       }
     });
   }
+
   signIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then(result => {
-        this.setUserData(result.user);
-        this.afAuth.authState.subscribe(user => {
-          if (user) {
-            console.log(user);
-          }
-        });
-      })
-      .catch(error => {
-        window.alert(error.message);
-      });
+    return defer(() =>
+      from(this.afAuth.signInWithEmailAndPassword(email, password))
+    );
+    // .then(result => {
+    //   this.setUserData(result.user);
+    //   this.afAuth.authState.subscribe(user => {
+    //     if (user) {
+    //       console.log(user);
+    //     }
+    //   });
+    // })
+    // .catch(error => {
+    //   window.alert(error.message);
+    // });
   }
+
+  getToken() {}
+
   signUp(email: string, password: string) {
     return defer(() =>
       from(this.afAuth.createUserWithEmailAndPassword(email, password))
     );
   }
+
   googleAuth() {
     return this.authLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       console.log(res);
     });
   }
+
   authLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
@@ -65,6 +74,7 @@ export class AuthService {
         window.alert(error);
       });
   }
+
   setUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`

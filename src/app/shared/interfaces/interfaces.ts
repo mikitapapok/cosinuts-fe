@@ -28,9 +28,11 @@ export interface IProducts {
 export interface IAllProduct {
   getAllProducts: IProducts[];
 }
+
 export interface IGetProducts {
   getProducts: { count: number; products: IProducts[] };
 }
+
 export interface ProductStateInterface {
   count: number[];
   products: IProducts[];
@@ -41,6 +43,7 @@ export interface ProductStateInterface {
 export interface AuthStateInterface {
   email: string;
 }
+
 export interface AppStateInterface {
   productType: { productType: ProductTypesType };
   products: ProductStateInterface;
@@ -53,4 +56,9 @@ export interface User {
   displayName: string;
   photoURL: string;
   emailVerified: boolean;
+}
+
+export interface AuthInterface {
+  email: string;
+  password: string;
 }

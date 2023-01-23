@@ -10,6 +10,7 @@ import { ToFixedPipe } from './pipes/to-fixed.pipe';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
 import { AuthFormComponent } from './auth-form/auth-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -29,7 +30,9 @@ import { AuthFormComponent } from './auth-form/auth-form.component';
     NgForOf,
     NgIf,
     NgClass,
+    FormsModule,
     AsyncPipe,
+    ReactiveFormsModule,
   ],
   declarations: [
     HeaderComponent,
