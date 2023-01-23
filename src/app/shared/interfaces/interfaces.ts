@@ -5,7 +5,10 @@ export interface INavigation {
   title: string;
   exact: boolean;
 }
-
+export interface AuthInterface {
+  email: string;
+  password: string;
+}
 export interface ICategories {
   type: ProductTypesType;
   title: string;

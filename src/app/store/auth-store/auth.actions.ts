@@ -6,3 +6,8 @@ export const signupAction = createAction(
 );
 
 export const noOpAction = createAction('[Effect] NoopAction');
+export const loginAction = createAction(
+  '[Login] loginAction',
+  props<{ email: string; password: string }>()
+);
+export const verifyTokenAction = createAction('[Effect] verifyToken');

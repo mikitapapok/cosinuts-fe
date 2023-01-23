@@ -29,6 +29,7 @@ import { AuthEffects } from './store/auth-store/auth.effects';
     BrowserModule,
     SharedModule,
     PagesModule,
+    HttpClientModule,
     ApolloModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),

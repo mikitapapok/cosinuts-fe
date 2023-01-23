@@ -5,14 +5,24 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { User } from '../interfaces/interfaces';
-import firebase from 'firebase/compat';
+import { AuthInterface, User } from '../interfaces/interfaces';
 import * as auth from 'firebase/auth';
-import { defer, from, Observable } from 'rxjs';
+import {
+  defer,
+  filter,
+  from,
+  map,
+  mergeMap,
+  Observable,
+  of,
+  switchMap,
+} from 'rxjs';
+import { getIdToken } from '@angular/fire/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   userData: any;
+
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
@@ -30,52 +40,40 @@ export class AuthService {
       }
     });
   }
-  signIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then(result => {
-        this.setUserData(result.user);
-        this.afAuth.authState.subscribe(user => {
-          if (user) {
-            console.log(user);
-          }
-        });
-      })
-      .catch(error => {
-        window.alert(error.message);
-      });
+
+  // signIn(email: string, password: string) {
+  //
+  //   return this.afAuth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then(result => {
+  //       this.setUserData(result.user);
+  //       this.afAuth.authState.subscribe(user => {
+  //         if (user) {
+  //           console.log(user);
+  //         }
+  //       });
+  //     })
+  //     .catch(error => {
+  //       window.alert(error.message);
+  //     });
+  // }
+
+  login(creds: AuthInterface) {
+    return defer(() =>
+      from(this.afAuth.signInWithEmailAndPassword(creds.email, creds.password))
+    );
   }
+
+  showUser() {
+    return defer(() => from(this.afAuth.currentUser)).pipe(
+      filter(currentUser => !!currentUser && !!currentUser.getIdToken(true))
+    );
+  }
+
   signUp(email: string, password: string) {
     return defer(() =>
       from(this.afAuth.createUserWithEmailAndPassword(email, password))
     );
-  }
-  googleAuth() {
-    return this.authLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      console.log(res);
-    });
-  }
-  authLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then(result => {
-        this.setUserData(result.user);
-      })
-      .catch(error => {
-        window.alert(error);
-      });
-  }
-  setUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-    };
   }
 
   signOut() {

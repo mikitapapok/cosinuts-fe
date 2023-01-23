@@ -1,1 +1,5 @@
-<app-auth-form title="login" description="a"></app-auth-form>
+<app-auth-form
+  title="Login"
+  description="Enter credentials to enter the app"
+  (authHandler)="loginHandler($event)"></app-auth-form>
+<h2>{{loginSub|async}}</h2>
