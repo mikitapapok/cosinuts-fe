@@ -18,6 +18,7 @@ import {
   switchMap,
 } from 'rxjs';
 import { getIdToken } from '@angular/fire/auth';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -27,7 +28,8 @@ export class AuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private http: HttpClient
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -74,6 +76,15 @@ export class AuthService {
     return defer(() =>
       from(this.afAuth.createUserWithEmailAndPassword(email, password))
     );
+  }
+
+  verifyToken(token: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: token,
+    });
+
+    return this.http.get('http://localhost:3000/login', { headers: headers });
   }
 
   signOut() {

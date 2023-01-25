@@ -52,24 +52,11 @@ export class AuthEffects {
                 : from(new Promise((resolve, reject) => reject(false)));
             }),
             map(token => {
-              const headers = new HttpHeaders({
-                'Content-Type': 'application/json',
-                Authorization: JSON.stringify(token),
-              });
-
-              this.http
-                .get('http://localhost:3000/login', { headers: headers })
-                .pipe(
-                  mergeMap(result => {
-                    console.log(result);
-                    return of(authActions.noOpAction());
-                  }),
-
-                  catchError(error => {
-                    window.alert(error.message);
-                    return of(authActions.noOpAction());
-                  })
-                );
+              if (token) {
+                return authActions.verifyTokenAction({
+                  token: JSON.stringify(token),
+                });
+              }
               return authActions.noOpAction();
             }),
             catchError(error => {
@@ -77,6 +64,24 @@ export class AuthEffects {
               return of(authActions.noOpAction());
             })
           )
+      )
+    );
+  });
+
+  verifyTokenEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.verifyTokenAction),
+      switchMap(action =>
+        this.authService.verifyToken(action.token).pipe(
+          map(result => {
+            console.log(result);
+            return authActions.noOpAction();
+          }),
+          catchError(error => {
+            window.alert(error.message);
+            return of(authActions.noOpAction());
+          })
+        )
       )
     );
   });

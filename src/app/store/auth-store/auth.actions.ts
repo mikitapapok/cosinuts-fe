@@ -10,4 +10,7 @@ export const loginAction = createAction(
   '[Login] loginAction',
   props<{ email: string; password: string }>()
 );
-export const verifyTokenAction = createAction('[Effect] verifyToken');
+export const verifyTokenAction = createAction(
+  '[Effect] verifyToken',
+  props<{ token: string }>()
+);
