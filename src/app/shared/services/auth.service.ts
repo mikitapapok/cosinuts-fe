@@ -84,7 +84,9 @@ export class AuthService {
       Authorization: token,
     });
 
-    return this.http.get('http://localhost:3000/login', { headers: headers });
+    return this.http.get('https://cosinuts.herokuapp.com/login', {
+      headers: headers,
+    });
   }
 
   signOut() {
