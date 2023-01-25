@@ -5,10 +5,12 @@ export interface INavigation {
   title: string;
   exact: boolean;
 }
+
 export interface AuthInterface {
   email: string;
   password: string;
 }
+
 export interface ICategories {
   type: ProductTypesType;
   title: string;
@@ -31,9 +33,11 @@ export interface IProducts {
 export interface IAllProduct {
   getAllProducts: IProducts[];
 }
+
 export interface IGetProducts {
   getProducts: { count: number; products: IProducts[] };
 }
+
 export interface ProductStateInterface {
   count: number[];
   products: IProducts[];
@@ -43,7 +47,9 @@ export interface ProductStateInterface {
 
 export interface AuthStateInterface {
   email: string;
+  loading: boolean;
 }
+
 export interface AppStateInterface {
   productType: { productType: ProductTypesType };
   products: ProductStateInterface;

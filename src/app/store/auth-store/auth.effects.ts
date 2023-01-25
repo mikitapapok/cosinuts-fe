@@ -74,8 +74,10 @@ export class AuthEffects {
       switchMap(action =>
         this.authService.verifyToken(action.token).pipe(
           map(result => {
-            console.log(result);
-            return authActions.noOpAction();
+            this.router.navigate(['catalog']);
+            return authActions.addUserInfoAction({
+              credentials: JSON.stringify(result),
+            });
           }),
           catchError(error => {
             window.alert(error.message);

@@ -5,32 +5,25 @@ import {
   AuthInterface,
 } from '../../../shared/interfaces/interfaces';
 
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import * as authActions from '../../../store/auth-store/auth.actions';
 import { AuthService } from '../../../shared/services/auth.service';
-import {
-  defer,
-  from,
-  map,
-  mergeMap,
-  Observable,
-  Subscribable,
-  Subscription,
-  switchMap,
-} from 'rxjs';
+import { map, Observable, of, Subscription } from 'rxjs';
+import { loadingSelector } from '../../../store/auth-store/auth.selectors';
 
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
 })
 export class LoginComponent {
-  loginSub?: Observable<any>;
-  userInfo?: Subscription;
+  loading$: Observable<boolean> = of(false);
 
   constructor(
     private store$: Store<AppStateInterface>,
     private auth: AuthService
-  ) {}
+  ) {
+    this.loading$ = this.store$.pipe(select(loadingSelector));
+  }
 
   loginHandler(credentials: AuthInterface) {
     this.store$.dispatch(
@@ -39,13 +32,6 @@ export class LoginComponent {
         password: credentials.password,
       })
     );
-    // this.loginSub = this.auth.login(credentials).pipe(
-    //   mergeMap(user => {
-    //     if (user.user) {
-    //       return from(user.user.getIdToken(true));
-    //     }
-    //     return from(new Promise(resolve => true));
-    //   })
-    // );
+    this.store$.dispatch(authActions.startLoadingAction());
   }
 }

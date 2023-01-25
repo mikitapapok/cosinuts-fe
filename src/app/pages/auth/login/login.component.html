@@ -1,5 +1,15 @@
-<app-auth-form
-  title="Login"
-  description="Enter credentials to enter the app"
-  (authHandler)="loginHandler($event)"></app-auth-form>
-<h2>{{loginSub|async}}</h2>
+<ng-container *ngIf="(loading$|async)===true">
+  <div class="mt-[100px]">
+    <app-spiner></app-spiner>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="!(loading$|async)">
+  <app-auth-form
+    title="Login"
+    description="Enter credentials to enter the app"
+    (authHandler)="loginHandler($event)"></app-auth-form>
+</ng-container>
+
+

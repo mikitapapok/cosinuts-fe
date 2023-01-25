@@ -10,3 +10,8 @@ export const selectAuthSelector = createSelector(
   authFeature,
   (state: AuthStateInterface) => state.email
 );
+
+export const loadingSelector = createSelector(
+  authFeature,
+  (state: AuthStateInterface) => state.loading
+);

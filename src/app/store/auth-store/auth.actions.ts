@@ -14,3 +14,9 @@ export const verifyTokenAction = createAction(
   '[Effect] verifyToken',
   props<{ token: string }>()
 );
+
+export const startLoadingAction = createAction('[Effect] launch loading');
+export const addUserInfoAction = createAction(
+  '[Effect] add user info',
+  props<{ credentials: string }>()
+);
