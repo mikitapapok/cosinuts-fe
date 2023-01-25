@@ -13,9 +13,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { BasketComponent } from './basket/basket.component';
+import { BasketTokenService } from '../shared/guards/basket-token.service';
 
 const routes: Routes = [
-  { path: '', component: SignupComponent },
+  { path: '', component: MainPageComponent },
   { path: 'about', component: AboutComponent },
   {
     path: 'catalog',
@@ -26,11 +28,17 @@ const routes: Routes = [
   },
   { path: 'contacts', component: ContactsComponent },
   { path: 'shops', component: ShopListComponent },
+  { path: 'signup', component: SignupComponent },
   {
     path: 'login',
     component: LoginComponent,
   },
   { path: 'delivery', component: DeliveryComponent },
+  {
+    path: 'basket',
+    component: BasketComponent,
+    canActivate: [BasketTokenService],
+  },
   {
     path: '**',
     redirectTo: 'not-found',
@@ -41,6 +49,7 @@ const routes: Routes = [
     component: NotFoundComponent,
   },
 ];
+
 @NgModule({
   declarations: [
     MainPageComponent,
@@ -51,6 +60,7 @@ const routes: Routes = [
     DeliveryComponent,
     ProductComponent,
     NotFoundComponent,
+    BasketComponent,
     LoginComponent,
     SignupComponent,
   ],
