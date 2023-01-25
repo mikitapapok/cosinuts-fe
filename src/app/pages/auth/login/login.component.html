@@ -9,7 +9,13 @@
   <app-auth-form
     title="Login"
     description="Enter credentials to enter the app"
-    (authHandler)="loginHandler($event)"></app-auth-form>
+    (authHandler)="loginHandler($event)">
+    <p class="mt-[20px] font-xl text-grey-600">
+      if you do not have account, please go to
+      <a class="text-black cursor-pointer" routerLink="/signup">Signup </a>
+      page
+    </p>
+  </app-auth-form>
 </ng-container>
 
 
