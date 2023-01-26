@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { BasketProduct } from '../../shared/interfaces/interfaces';
 
 export const signupAction = createAction(
   '[SignUp] signUp',
@@ -23,5 +22,5 @@ export const signUpAction = createAction(
 export const startLoadingAction = createAction('[Effect] launch loading');
 export const addUserInfoAction = createAction(
   '[Effect] add user info',
-  props<{ email: string; basket: BasketProduct[] }>()
+  props<{ email: string; basket: string }>()
 );

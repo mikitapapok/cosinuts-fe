@@ -4,7 +4,7 @@ import * as authActions from './auth.actions';
 
 const initState: AuthStateInterface = {
   email: '',
-  basket: [],
+  basket: '[]',
   loading: false,
 };
 export const authReducer = createReducer(

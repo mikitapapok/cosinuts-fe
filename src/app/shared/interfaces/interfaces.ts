@@ -51,7 +51,7 @@ export interface BasketProduct {
 
 export interface AuthStateInterface {
   email: string;
-  basket: BasketProduct[];
+  basket: string;
   loading: boolean;
 }
 

@@ -23,7 +23,7 @@
         Корзина
         <div
           class="bg-white rounded-[10px] pl-[14px] pr-[13px] p-[9px] text-grey-800 ml-[15px]">
-          {{ count }}
+          {{ (basket|async).length  }}
         </div>
       </a>
     </div>
