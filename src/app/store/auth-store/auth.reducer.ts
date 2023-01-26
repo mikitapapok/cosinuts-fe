@@ -1,13 +1,10 @@
-import { createReducer, on, State } from '@ngrx/store';
-import {
-  AppStateInterface,
-  AuthStateInterface,
-} from '../../shared/interfaces/interfaces';
+import { createReducer, on } from '@ngrx/store';
+import { AuthStateInterface } from '../../shared/interfaces/interfaces';
 import * as authActions from './auth.actions';
-import { state } from '@angular/animations';
 
 const initState: AuthStateInterface = {
   email: '',
+  basket: [],
   loading: false,
 };
 export const authReducer = createReducer(
@@ -19,9 +16,10 @@ export const authReducer = createReducer(
     authActions.startLoadingAction,
     (state): AuthStateInterface => ({ ...state, loading: true })
   ),
-  on(authActions.addUserInfoAction, (state, { credentials }) => ({
+  on(authActions.addUserInfoAction, (state, props) => ({
     ...state,
-    email: credentials,
+    email: props.email,
+    basket: props.basket,
     loading: false,
   }))
 );

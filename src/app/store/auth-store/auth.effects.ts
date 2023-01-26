@@ -5,8 +5,7 @@ import { AppStateInterface } from '../../shared/interfaces/interfaces';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import * as authActions from './auth.actions';
-import { catchError, from, map, mergeMap, of, switchMap, tap } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, from, map, mergeMap, of, switchMap } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
@@ -14,8 +13,7 @@ export class AuthEffects {
     private actions$: Actions,
     private authService: AuthService,
     private store: Store<AppStateInterface>,
-    private router: Router,
-    private http: HttpClient
+    private router: Router
   ) {}
 
   signUp$ = createEffect(() => {
@@ -25,6 +23,23 @@ export class AuthEffects {
         this.authService.signUp(action.email, action.password).pipe(
           map(() => {
             this.router.navigate(['login']);
+            return authActions.signUpAction({ email: action.email });
+          }),
+          catchError(error => {
+            window.alert(error.message);
+            return of(authActions.noOpAction());
+          })
+        )
+      )
+    );
+  });
+  signupWithBackend$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.signUpAction),
+      switchMap(action =>
+        this.authService.signUpWithBack(action.email).pipe(
+          map(result => {
+            window.localStorage.setItem('id', result);
             return authActions.noOpAction();
           }),
           catchError(error => {
@@ -71,20 +86,26 @@ export class AuthEffects {
   verifyTokenEffect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.verifyTokenAction),
-      switchMap(action =>
-        this.authService.verifyToken(action.token).pipe(
-          map(result => {
-            this.router.navigate(['catalog']);
-            return authActions.addUserInfoAction({
-              credentials: JSON.stringify(result),
-            });
-          }),
-          catchError(error => {
-            window.alert(error.message);
-            return of(authActions.noOpAction());
-          })
-        )
-      )
+      switchMap(action => {
+        const id = window.localStorage.getItem('id');
+        if (id) {
+          return this.authService.verifyToken(action.token, id).pipe(
+            map(result => {
+              const currentUserInfo = JSON.parse(JSON.stringify(result));
+              this.router.navigate(['catalog']);
+              return authActions.addUserInfoAction({
+                email: currentUserInfo.email,
+                basket: currentUserInfo.products,
+              });
+            }),
+            catchError(error => {
+              window.alert(error.message);
+              return of(authActions.noOpAction());
+            })
+          );
+        }
+        return of(authActions.noOpAction());
+      })
     );
   });
 }

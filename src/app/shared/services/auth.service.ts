@@ -1,23 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { AuthInterface, User } from '../interfaces/interfaces';
-import * as auth from 'firebase/auth';
-import {
-  defer,
-  filter,
-  from,
-  map,
-  mergeMap,
-  Observable,
-  of,
-  switchMap,
-} from 'rxjs';
-import { getIdToken } from '@angular/fire/auth';
+import { AuthInterface } from '../interfaces/interfaces';
+import { defer, filter, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
@@ -43,23 +29,6 @@ export class AuthService {
     });
   }
 
-  // signIn(email: string, password: string) {
-  //
-  //   return this.afAuth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then(result => {
-  //       this.setUserData(result.user);
-  //       this.afAuth.authState.subscribe(user => {
-  //         if (user) {
-  //           console.log(user);
-  //         }
-  //       });
-  //     })
-  //     .catch(error => {
-  //       window.alert(error.message);
-  //     });
-  // }
-
   login(creds: AuthInterface) {
     return defer(() =>
       from(this.afAuth.signInWithEmailAndPassword(creds.email, creds.password))
@@ -78,15 +47,27 @@ export class AuthService {
     );
   }
 
-  verifyToken(token: string) {
+  signUpWithBack(cred: string) {
+    return this.http.post(
+      'http://localhost:3000/auth/signup',
+      { email: cred },
+      { responseType: 'text' }
+    );
+  }
+
+  verifyToken(token: string, id: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: token,
     });
 
-    return this.http.get('https://cosinuts.herokuapp.com/login', {
-      headers: headers,
-    });
+    return this.http.post(
+      'http://localhost:3000/auth/login',
+      { id: id },
+      {
+        headers: headers,
+      }
+    );
   }
 
   signOut() {

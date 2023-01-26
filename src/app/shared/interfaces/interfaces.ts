@@ -45,8 +45,13 @@ export interface ProductStateInterface {
   loading: boolean;
 }
 
+export interface BasketProduct {
+  id: string;
+}
+
 export interface AuthStateInterface {
   email: string;
+  basket: BasketProduct[];
   loading: boolean;
 }
 
