@@ -49,7 +49,7 @@ export class AuthService {
 
   signUpWithBack(cred: string) {
     return this.http.post(
-      'http://localhost:3000/auth/signup',
+      'https://cosinuts.herokuapp.com/auth/signup',
       { email: cred },
       { responseType: 'text' }
     );
@@ -62,7 +62,7 @@ export class AuthService {
     });
 
     return this.http.post(
-      'http://localhost:3000/auth/login',
+      'https://cosinuts.herokuapp.com/auth/login',
       { id: id },
       {
         headers: headers,
