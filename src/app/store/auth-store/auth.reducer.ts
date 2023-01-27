@@ -16,6 +16,10 @@ export const authReducer = createReducer(
     authActions.startLoadingAction,
     (state): AuthStateInterface => ({ ...state, loading: true })
   ),
+  on(
+    authActions.noOpAction,
+    (state): AuthStateInterface => ({ ...state, loading: false })
+  ),
   on(authActions.addUserInfoAction, (state, props) => ({
     ...state,
     email: props.email,

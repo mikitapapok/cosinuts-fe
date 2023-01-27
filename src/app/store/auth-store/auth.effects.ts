@@ -21,9 +21,12 @@ export class AuthEffects {
       ofType(authActions.signupAction),
       switchMap(action =>
         this.authService.signUp(action.email, action.password).pipe(
-          map(() => {
+          map(res => {
+            if (!res) {
+              throw Error();
+            }
             this.router.navigate(['login']);
-            return authActions.signUpAction({ email: action.email });
+            return authActions.signupWithBackAction({ email: action.email });
           }),
           catchError(error => {
             window.alert(error.message);
@@ -35,7 +38,7 @@ export class AuthEffects {
   });
   signupWithBackend$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(authActions.signUpAction),
+      ofType(authActions.signupWithBackAction),
       switchMap(action =>
         this.authService.signUpWithBack(action.email).pipe(
           map(result => {

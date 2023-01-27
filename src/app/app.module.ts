@@ -52,7 +52,7 @@ import { AuthEffects } from './store/auth-store/auth.effects';
         return {
           cache: new InMemoryCache({ addTypename: false }),
           link: httpLink.create({
-            uri: 'https://cosinuts.herokuapp.com/graphql',
+            uri: 'http://localhost:3000/graphql',
           }),
         };
       },

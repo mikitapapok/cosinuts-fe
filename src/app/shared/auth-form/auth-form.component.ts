@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppStateInterface } from '../interfaces/interfaces';
+import * as authActions from '../../store/auth-store/auth.actions';
 
 @Component({
   selector: 'app-auth-form',
@@ -18,6 +21,8 @@ export class AuthFormComponent implements OnInit {
     password: string;
   }>();
   signupForm: FormGroup = new FormGroup({});
+
+  constructor(private store$: Store<AppStateInterface>) {}
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -47,6 +52,7 @@ export class AuthFormComponent implements OnInit {
   }
 
   submitHandler() {
+    this.store$.dispatch(authActions.startLoadingAction());
     this.authHandler.emit({
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,

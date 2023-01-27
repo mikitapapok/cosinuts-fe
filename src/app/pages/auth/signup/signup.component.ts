@@ -1,34 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as authActions from '../../../store/auth-store/auth.actions';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {
   AppStateInterface,
   AuthInterface,
 } from '../../../shared/interfaces/interfaces';
+import { loadingSelector } from '../../../store/auth-store/auth.selectors';
+import { Subscribable } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
   templateUrl: 'signup.component.html',
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
+  loading$?: Subscribable<boolean>;
+
   constructor(private store$: Store<AppStateInterface>) {}
 
+  ngOnInit() {
+    this.loading$ = this.store$.pipe(select(loadingSelector));
+  }
+
   submitHandler(value: AuthInterface) {
-    // this.authService
-    //   .signUp(this.signupForm.value.email, this.signupForm.value.password)
-    //   .pipe(
-    //     catchError(e => {
-    //       throw e;
-    //     })
-    //   )
-    //   .subscribe(
-    //     value => {
-    //       console.log(value);
-    //     },
-    //     error => {
-    //       window.alert(error.message);
-    //     }
-    //   );
     this.store$.dispatch(
       authActions.signupAction({
         email: value.email,
