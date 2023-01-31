@@ -6,7 +6,7 @@
       <li
         class="mt-[26px] cursor-pointer text-s hover:text-orange min-w-[206px]"
         [ngClass]="
-          productTypeCheck(categoryItem.type)
+          (productTypeSubscription$ | async) === categoryItem.type
             ? 'text-white rounded-[15px] p-[12px] pb-[15px] pl-[13px] bg-orange'
             : ''
         "

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
-import { NgClass, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { CategoriesComponent } from './categories/categories.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ProductItemComponent } from './product-item/product-item.component';
@@ -21,7 +21,14 @@ import { PaginationNavComponent } from './pagination-nav/pagination-nav.componen
     SpinnerComponent,
     PaginationNavComponent,
   ],
-  imports: [RouterLinkWithHref, RouterLinkActive, NgForOf, NgIf, NgClass],
+  imports: [
+    RouterLinkWithHref,
+    RouterLinkActive,
+    NgForOf,
+    NgIf,
+    NgClass,
+    AsyncPipe,
+  ],
   declarations: [
     HeaderComponent,
     FooterComponent,

@@ -8,14 +8,32 @@ import { ShopListComponent } from './shop-list/shop-list.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { SharedModule } from '../shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { ProductComponent } from './product/product.component';
+import { FormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'catalog', component: CatalogComponent },
+  {
+    path: 'catalog',
+    children: [
+      { path: '', component: CatalogComponent },
+      { path: ':id', component: ProductComponent },
+    ],
+  },
   { path: 'contacts', component: ContactsComponent },
   { path: 'shops', component: ShopListComponent },
   { path: 'delivery', component: DeliveryComponent },
+  {
+    path: '**',
+    redirectTo: 'not-found',
+    pathMatch: 'full',
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+  },
 ];
 @NgModule({
   declarations: [
@@ -25,8 +43,15 @@ const routes: Routes = [
     ContactsComponent,
     ShopListComponent,
     DeliveryComponent,
+    ProductComponent,
+    NotFoundComponent,
   ],
-  imports: [CommonModule, RouterModule.forRoot(routes), SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes),
+    SharedModule,
+    FormsModule,
+  ],
   exports: [RouterModule, MainPageComponent],
 })
 export class PagesModule {}

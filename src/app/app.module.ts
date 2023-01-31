@@ -11,7 +11,11 @@ import { InMemoryCache } from '@apollo/client/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { productTypeReducer } from './store/product-type-store/product-type.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { combineReducer } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { ProductsEffect } from './store/products-store/products.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +26,12 @@ import { productTypeReducer } from './store/product-type-store/product-type.redu
     ApolloModule,
     HttpClientModule,
     CommonModule,
-    StoreModule.forRoot({ productType: productTypeReducer }),
+    StoreModule.forRoot(combineReducer),
+    EffectsModule.forRoot([ProductsEffect]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     {
@@ -31,7 +40,7 @@ import { productTypeReducer } from './store/product-type-store/product-type.redu
         return {
           cache: new InMemoryCache({ addTypename: false }),
           link: httpLink.create({
-            uri: 'https://cosinuts.herokuapp.com/graphql',
+            uri: 'http://localhost:3000/graphql',
           }),
         };
       },

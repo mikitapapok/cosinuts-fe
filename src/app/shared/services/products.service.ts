@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { IGetProducts } from '../interfaces/interfaces';
 
-import { from, map } from 'rxjs';
+import { from, map, Subject, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -27,7 +27,7 @@ export class ProductsService {
       `,
     });
   }
-
+  private refetchSubj = new Subject();
   getProductsWithRefetch(typeOfProduct: string, offset: number) {
     return from(
       this.productQuery?.refetch({ productType: typeOfProduct, offset: offset })
@@ -39,23 +39,5 @@ export class ProductsService {
         };
       })
     );
-  }
-  fetchProductsByType(typeOfProduct: string) {
-    return this.apollo.watchQuery<IGetProducts>({
-      query: gql`
-        query ($productType: String, $offset: Int) {
-          getProducts(type: $productType, offset: $offset) {
-            id
-            title
-            description
-            type
-            src
-            cost
-            salePrice
-          }
-        }
-      `,
-      variables: { productType: typeOfProduct },
-    }).valueChanges;
   }
 }

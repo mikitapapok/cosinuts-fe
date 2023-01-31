@@ -16,7 +16,7 @@ export enum StoreSelectors {
 }
 
 export interface IProducts {
-  id: any;
+  id: string;
   title: string;
   description: string;
   src: string;
@@ -30,4 +30,14 @@ export interface IAllProduct {
 }
 export interface IGetProducts {
   getProducts: { count: number; products: IProducts[] };
+}
+export interface ProductStateInterface {
+  count: number[];
+  products: IProducts[];
+  currentPage: number;
+  loading: boolean;
+}
+export interface AppStateInterface {
+  productType: { productType: ProductTypesType };
+  products: ProductStateInterface;
 }

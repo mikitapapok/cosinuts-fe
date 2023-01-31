@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IProducts } from '../interfaces/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-item',
@@ -7,4 +8,8 @@ import { IProducts } from '../interfaces/interfaces';
 })
 export class ProductItemComponent {
   @Input() product?: IProducts;
+  constructor(private router: Router) {}
+  goToProductPageHandler(id?: string) {
+    this.router.navigate(['/catalog', id]);
+  }
 }
