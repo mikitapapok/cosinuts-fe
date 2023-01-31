@@ -22,6 +22,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthEffects } from './store/auth-store/auth.effects';
+import { BasketEffects } from './store/auth-store/basket.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,7 @@ import { AuthEffects } from './store/auth-store/auth.effects';
     AngularFireDatabaseModule,
     CommonModule,
     StoreModule.forRoot(combineReducer),
-    EffectsModule.forRoot([ProductsEffect, AuthEffects]),
+    EffectsModule.forRoot([ProductsEffect, AuthEffects, BasketEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -52,7 +53,7 @@ import { AuthEffects } from './store/auth-store/auth.effects';
         return {
           cache: new InMemoryCache({ addTypename: false }),
           link: httpLink.create({
-            uri: 'http://localhost:3000/graphql',
+            uri: environment.URL_API.url + 'graphql',
           }),
         };
       },

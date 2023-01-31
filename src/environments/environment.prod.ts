@@ -10,4 +10,7 @@ export const environment = {
     appId: '1:208308027771:web:68e7e790245fd6e3f57dde',
     measurementId: 'G-XTVZN1FLJ1',
   },
+  URL_API: {
+    url: 'https://cosinuts.herokuapp.com/',
+  },
 };

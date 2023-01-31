@@ -25,5 +25,15 @@ export const authReducer = createReducer(
     email: props.email,
     basket: props.basket,
     loading: false,
-  }))
+  })),
+  on(authActions.addProductIdAction, (state, { id }) => {
+    const valueFromBasket = JSON.parse(state.basket);
+    const newProductBasket = [...valueFromBasket, id];
+
+    return {
+      ...state,
+      basket: JSON.stringify(newProductBasket),
+      loading: false,
+    };
+  })
 );

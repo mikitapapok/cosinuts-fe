@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthInterface } from '../interfaces/interfaces';
 import { defer, filter, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -49,7 +50,7 @@ export class AuthService {
 
   signUpWithBack(cred: string) {
     return this.http.post(
-      'http://localhost:3000/auth/signup',
+      environment.URL_API.url + 'auth/signup',
       { email: cred },
       { responseType: 'text' }
     );
@@ -62,7 +63,7 @@ export class AuthService {
     });
 
     return this.http.post(
-      'http://localhost:3000/auth/login',
+      environment.URL_API.url + 'auth/login',
       { id: id },
       {
         headers: headers,

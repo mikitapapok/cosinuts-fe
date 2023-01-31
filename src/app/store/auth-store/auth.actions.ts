@@ -15,10 +15,6 @@ export const verifyTokenAction = createAction(
   props<{ token: string }>()
 );
 
-export const signUpAction = createAction(
-  '[Effect] signup',
-  props<{ email: string }>()
-);
 export const signupWithBackAction = createAction(
   '[effect] signup with backend',
   props<{ email: string }>()
@@ -28,4 +24,13 @@ export const stopLoadingAction = createAction('[Effect]stop loading action');
 export const addUserInfoAction = createAction(
   '[Effect] add user info',
   props<{ email: string; basket: string }>()
+);
+
+export const addToBasketAction = createAction(
+  '[Catalog] addToBasket',
+  props<{ id: string }>()
+);
+export const addProductIdAction = createAction(
+  '[Effect] add products id into the basket',
+  props<{ id: string }>()
 );
