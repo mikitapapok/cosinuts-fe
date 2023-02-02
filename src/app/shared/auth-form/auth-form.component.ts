@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-auth-form',
@@ -21,39 +16,21 @@ export class AuthFormComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      email: new FormControl('', [
-        Validators.required,
-        this.emailValidator.bind(this),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        this.passwordValidator.bind(this),
-      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
     });
-  }
-
-  emailValidator(control: AbstractControl): { [s: string]: boolean } | null {
-    if (!control.value.includes('@')) {
-      return { email: true };
-    }
-    return null;
-  }
-
-  passwordValidator(control: AbstractControl): { [s: string]: boolean } | null {
-    if (control.value.length < 6) {
-      return { password: true };
-    }
-    return null;
   }
 
   submitHandler() {
-    this.authHandler.emit({
-      email: this.signupForm.value.email,
-      password: this.signupForm.value.password,
-    });
-    this.signupForm.reset({
-      email: '',
-      password: '',
-    });
+    if (this.signupForm.valid) {
+      this.authHandler.emit({
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+      });
+      this.signupForm.reset({
+        email: '',
+        password: '',
+      });
+    }
   }
 }
