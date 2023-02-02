@@ -1,0 +1,10 @@
+<app-auth-form
+  title="Sign up"
+  description="please enter email and password to register"
+  (authHandler)="submitHandler($event)">
+  <p class="mt-[20px] font-xl text-grey-600">
+    if you are already signed up, got to
+    <a class="text-black cursor-pointer" routerLink="/login">Login </a>
+    page
+  </p>
+</app-auth-form>

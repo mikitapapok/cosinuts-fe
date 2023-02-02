@@ -16,6 +16,12 @@ import { combineReducer } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { ProductsEffect } from './store/products-store/products.effects';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthEffects } from './store/auth-store/auth.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,11 +29,17 @@ import { ProductsEffect } from './store/products-store/products.effects';
     BrowserModule,
     SharedModule,
     PagesModule,
+    HttpClientModule,
     ApolloModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     CommonModule,
     StoreModule.forRoot(combineReducer),
-    EffectsModule.forRoot([ProductsEffect]),
+    EffectsModule.forRoot([ProductsEffect, AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -40,7 +52,7 @@ import { ProductsEffect } from './store/products-store/products.effects';
         return {
           cache: new InMemoryCache({ addTypename: false }),
           link: httpLink.create({
-            uri: 'http://localhost:3000/graphql',
+            uri: 'https://cosinuts.herokuapp.com/graphql',
           }),
         };
       },

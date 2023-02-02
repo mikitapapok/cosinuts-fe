@@ -1,0 +1,48 @@
+<form
+  [formGroup]="signupForm"
+  (ngSubmit)="submitHandler()"
+  class="mt-[100px] p-[20px] shadow-xl rounded-[10px] flex flex-col items-center">
+  <article class="flex flex-col items-center">
+    <h2 class="text-l font-xl text-grey-600">{{ title }}</h2>
+    <p class="mt-[20px] font-xl text-grey-600">
+      {{ description }}
+    </p>
+  </article>
+  <section class="mt-[30px]">
+    <div class="flex flex-col">
+      <label for="email" class="text-grey-600 font-xl">Enter Email</label>
+      <input
+        type="text"
+        formControlName="email"
+        id="email"
+        class="mt-[10px] border-[1px] border-grey-400 py-[10px] text-[20px] px-[5px] rounded-[5px]"/>
+    </div>
+    <div class="flex flex-col mt-[10px]">
+      <label for="password" class="text-grey-600 font-xl">Enter password</label>
+      <input
+        type="text"
+        [ngClass]="
+          !signupForm.get('email')?.valid && signupForm.get('email')?.touched
+            ? 'border-red'
+            : ''
+        "
+        formControlName="password"
+        id="password"
+        class="mt-[10px] border-[1px] border-grey-400 py-[10px] text-[20px] px-[5px] rounded-[5px]"
+        required/>
+    </div>
+  </section>
+
+  <button
+    type="submit"
+    class="mt-[30px] p-[20px] text-white px-[40px] rounded-[10px]"
+    [disabled]="!signupForm.valid"
+    [ngClass]="
+      signupForm.get('email')?.valid && signupForm.get('password')?.valid
+        ? 'bg-orange'
+        : 'bg-orange-500'
+    ">
+    Sign up
+  </button>
+  <ng-content></ng-content>
+</form>
