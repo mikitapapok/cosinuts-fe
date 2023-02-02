@@ -41,8 +41,7 @@ export class AuthEffects {
       ofType(authActions.signupWithBackAction),
       switchMap(action =>
         this.authService.signUpWithBack(action.email).pipe(
-          map(result => {
-            window.localStorage.setItem('id', result);
+          map(() => {
             return authActions.noOpAction();
           }),
           catchError(error => {
@@ -73,6 +72,7 @@ export class AuthEffects {
               if (token) {
                 return authActions.verifyTokenAction({
                   token: JSON.stringify(token),
+                  email: action.email,
                 });
               }
               return authActions.noOpAction();
@@ -90,24 +90,20 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authActions.verifyTokenAction),
       switchMap(action => {
-        const id = window.localStorage.getItem('id');
-        if (id) {
-          return this.authService.verifyToken(action.token, id).pipe(
-            map(result => {
-              const currentUserInfo = JSON.parse(JSON.stringify(result));
-              this.router.navigate(['catalog']);
-              return authActions.addUserInfoAction({
-                email: currentUserInfo.email,
-                basket: currentUserInfo.products,
-              });
-            }),
-            catchError(error => {
-              window.alert(error.message);
-              return of(authActions.noOpAction());
-            })
-          );
-        }
-        return of(authActions.noOpAction());
+        return this.authService.verifyToken(action.token, action.email).pipe(
+          map(result => {
+            const currentUserInfo = JSON.parse(JSON.stringify(result));
+            this.router.navigate(['catalog']);
+            return authActions.addUserInfoAction({
+              email: currentUserInfo.email,
+              basket: currentUserInfo.products,
+            });
+          }),
+          catchError(error => {
+            window.alert(error.message);
+            return of(authActions.noOpAction());
+          })
+        );
       })
     );
   });

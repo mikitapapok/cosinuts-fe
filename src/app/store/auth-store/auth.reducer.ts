@@ -4,7 +4,7 @@ import * as authActions from './auth.actions';
 
 const initState: AuthStateInterface = {
   email: '',
-  basket: '[]',
+  basket: [],
   loading: false,
 };
 export const authReducer = createReducer(
@@ -27,12 +27,11 @@ export const authReducer = createReducer(
     loading: false,
   })),
   on(authActions.addProductIdAction, (state, { id }) => {
-    const valueFromBasket = JSON.parse(state.basket);
-    const newProductBasket = [...valueFromBasket, id];
+    const newProductBasket = [...state.basket, id];
 
     return {
       ...state,
-      basket: JSON.stringify(newProductBasket),
+      basket: newProductBasket,
       loading: false,
     };
   })

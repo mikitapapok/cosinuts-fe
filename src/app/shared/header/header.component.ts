@@ -18,8 +18,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.basket = this.store$
-      .pipe(select(basketSelector))
-      .pipe(map(a => JSON.parse(a)));
+    this.basket = this.store$.pipe(select(basketSelector)).pipe(map(a => a));
   }
 }

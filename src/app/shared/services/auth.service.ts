@@ -56,7 +56,7 @@ export class AuthService {
     );
   }
 
-  verifyToken(token: string, id: string) {
+  verifyToken(token: string, email: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: token,
@@ -64,7 +64,7 @@ export class AuthService {
 
     return this.http.post(
       environment.URL_API.url + 'auth/login',
-      { id: id },
+      { email: email },
       {
         headers: headers,
       }
