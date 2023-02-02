@@ -23,6 +23,7 @@ export class CategoriesComponent implements OnInit {
   categoriesList?: ICategories[];
   productTypeSubscription$?: Observable<string>;
 
+
   constructor(private store: Store<AppStateInterface>) {
     this.title = PageTitles.Categories;
     this.categoriesList = categoriesList;
@@ -37,7 +38,7 @@ export class CategoriesComponent implements OnInit {
 
   changeProductType(typeOfProduct: ProductTypesType): void {
     this.store.dispatch(runLoadingAction());
-    this.store.dispatch(changeTypeAction({productType: typeOfProduct}));
-    this.store.dispatch(addProductsAction({offset: 0}));
+    this.store.dispatch(changeTypeAction({ productType: typeOfProduct }));
+    this.store.dispatch(addProductsAction({ offset: 0 }));
   }
 }
