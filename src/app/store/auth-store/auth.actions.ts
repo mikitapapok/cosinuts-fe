@@ -34,3 +34,7 @@ export const addProductIdAction = createAction(
   '[Effect] add products id into the basket',
   props<{ id: string }>()
 );
+
+export const pushBasketToBackAction = createAction(
+  '[ProductItem] push basket to backend'
+);
