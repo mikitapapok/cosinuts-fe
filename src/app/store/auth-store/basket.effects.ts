@@ -4,15 +4,24 @@ import { select, Store } from '@ngrx/store';
 import { AppStateInterface } from '../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import * as authActions from './auth.actions';
-import { debounceTime, of, switchMap, withLatestFrom } from 'rxjs';
-import { basketSelector, selectAuthSelector } from './auth.selectors';
+import {
+  catchError,
+  debounceTime,
+  map,
+  of,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs';
+import { selectAuthSelector, userBasketSelector } from './auth.selectors';
+import { ProductsService } from '../../shared/services/products.service';
 
 @Injectable()
 export class BasketEffects {
   constructor(
     private actions$: Actions,
     private store$: Store<AppStateInterface>,
-    private router: Router
+    private router: Router,
+    private productService: ProductsService
   ) {}
 
   checkStatus$ = createEffect(() => {
@@ -32,11 +41,15 @@ export class BasketEffects {
   pushBasket = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.pushBasketToBackAction),
-      withLatestFrom(this.store$.pipe(select(basketSelector))),
+      withLatestFrom(this.store$.pipe(select(userBasketSelector))),
       debounceTime(4000),
-      switchMap(([_, basket]) => {
-        console.log(basket);
-        return of(authActions.noOpAction());
+      switchMap(([_, userInfo]) => {
+        return this.productService
+          .updateUser(userInfo.basket, userInfo.email)
+          .pipe(
+            map(() => authActions.noOpAction()),
+            catchError(() => of(authActions.noOpAction()))
+          );
       })
     );
   });

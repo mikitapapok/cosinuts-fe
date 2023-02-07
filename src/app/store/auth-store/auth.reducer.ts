@@ -20,18 +20,27 @@ export const authReducer = createReducer(
     authActions.noOpAction,
     (state): AuthStateInterface => ({ ...state, loading: false })
   ),
-  on(authActions.addUserInfoAction, (state, props) => ({
-    ...state,
-    email: props.email,
-    basket: props.basket,
-    loading: false,
-  })),
-  on(authActions.addProductIdAction, (state, { id }) => {
-    const newProductBasket = [...state.basket, id];
-
+  on(authActions.addUserInfoAction, (state, props) => {
     return {
       ...state,
-      basket: newProductBasket,
+      email: props.email,
+      basket: props.basket,
+      loading: false,
+    };
+  }),
+  on(authActions.addProductIdAction, (state, { id }) => {
+    if (id) {
+      const newProductBasket = [...state.basket, id];
+
+      return {
+        ...state,
+        basket: newProductBasket,
+        loading: false,
+      };
+    }
+    return {
+      ...state,
+      basket: [],
       loading: false,
     };
   })

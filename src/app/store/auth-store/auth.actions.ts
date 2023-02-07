@@ -32,9 +32,14 @@ export const addToBasketAction = createAction(
 );
 export const addProductIdAction = createAction(
   '[Effect] add products id into the basket',
-  props<{ id: string }>()
+  props<{ id?: string }>()
 );
 
 export const pushBasketToBackAction = createAction(
   '[ProductItem] push basket to backend'
+);
+
+export const synchronizeData = createAction(
+  '[Effect] syncronize data',
+  props<{ email: string; products: string[] }>()
 );

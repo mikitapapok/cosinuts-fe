@@ -17,18 +17,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone,
     private http: HttpClient
-  ) {
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-      }
-    });
-  }
+  ) {}
 
   login(creds: AuthInterface) {
     return defer(() =>

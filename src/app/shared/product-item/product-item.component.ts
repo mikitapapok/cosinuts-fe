@@ -7,7 +7,6 @@ import {
   addToBasketAction,
   pushBasketToBackAction,
 } from '../../store/auth-store/auth.actions';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-product-item',
@@ -15,7 +14,6 @@ import { Subject } from 'rxjs';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product?: IProducts;
-  sbj: Subject<string> = new Subject<string>();
 
   products: string[] = [];
 
@@ -32,12 +30,8 @@ export class ProductItemComponent implements OnInit {
 
   addToBasketHandler(id?: string) {
     if (id) {
-      // this.sbj
-      //   .pipe(switchMap(() => this.store$.pipe(select(basketSelector))))
-      //   .subscribe(res => console.log(res));
       this.store$.dispatch(addToBasketAction({ id }));
       this.store$.dispatch(pushBasketToBackAction());
-      // this.sbj.next(id);
     }
   }
 }

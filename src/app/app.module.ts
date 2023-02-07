@@ -23,6 +23,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthEffects } from './store/auth-store/auth.effects';
 import { BasketEffects } from './store/auth-store/basket.effects';
+import { metaReducers } from './store/persist';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,7 @@ import { BasketEffects } from './store/auth-store/basket.effects';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     CommonModule,
-    StoreModule.forRoot(combineReducer),
+    StoreModule.forRoot(combineReducer, { metaReducers }),
     EffectsModule.forRoot([ProductsEffect, AuthEffects, BasketEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

@@ -15,7 +15,10 @@ export const loadingSelector = createSelector(
   authFeature,
   (state: AuthStateInterface) => state.loading
 );
-
+export const userBasketSelector = createSelector(
+  authFeature,
+  (state: AuthStateInterface) => state
+);
 export const basketSelector = createSelector(
   authFeature,
   (state: AuthStateInterface) => state.basket
