@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ProductsService } from '../../shared/services/products.service';
 import {
   AppStateInterface,
-  IProducts,
+  IProduct,
 } from '../../shared/interfaces/interfaces';
 import { Store } from '@ngrx/store';
 import {
@@ -22,7 +22,7 @@ import {
 })
 export class CatalogComponent implements OnInit, OnDestroy {
   title?: string;
-  productList$?: Observable<IProducts[]>;
+  productList$?: Observable<IProduct[]>;
   loading$?: Observable<boolean>;
 
   type: string = ProductTypes.DriedFruits;

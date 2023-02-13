@@ -11,6 +11,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BasketButtonComponent } from './basket-button/basket-button.component';
+import { ArrayFilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   exports: [
@@ -21,7 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
+    ArrayFilterPipe,
     SpinnerComponent,
+    BasketButtonComponent,
     PaginationNavComponent,
   ],
   imports: [
@@ -41,9 +45,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     PageTitleComponent,
     ProductItemComponent,
     ToFixedPipe,
+    ArrayFilterPipe,
     SpinnerComponent,
     AuthFormComponent,
     PaginationNavComponent,
+    BasketButtonComponent,
   ],
 })
 export class SharedModule {}

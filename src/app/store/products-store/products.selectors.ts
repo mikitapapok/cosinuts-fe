@@ -22,3 +22,8 @@ export const loadingSelector = createSelector(
   productsFeature,
   (state: ProductStateInterface) => state.loading
 );
+
+export const currentProductSelector = createSelector(
+  productsFeature,
+  (state: ProductStateInterface) => state.currentProduct
+);

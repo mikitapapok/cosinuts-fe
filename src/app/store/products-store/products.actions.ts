@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IProducts } from '../../shared/interfaces/interfaces';
+import { IProduct } from '../../shared/interfaces/interfaces';
 
 export const addProductsAction = createAction(
   '[Categories] AddProducts',
@@ -8,11 +8,21 @@ export const addProductsAction = createAction(
 
 export const productsFromQueries = createAction(
   '[Effect] products from effect',
-  props<{ count: number; products: IProducts[]; currentPage: number }>()
+  props<{ count: number; products: IProduct[]; currentPage: number }>()
 );
 
 export const changeCurrentPage = createAction(
   '[Categories] change current page to 0'
 );
-
+export const getProductAction = createAction(
+  '[product-item] getOneProduct',
+  props<{ id: string }>()
+);
+export const addProductToTheStoreAction = createAction(
+  '[Effect] addProductToStore',
+  props<{ product: IProduct }>()
+);
 export const runLoadingAction = createAction('[catalog] loading');
+export const clearCurrentProductAction = createAction(
+  '[product] clearCurrentProductInfo'
+);

@@ -20,7 +20,12 @@ export enum StoreSelectors {
   productType = 'productType',
 }
 
-export interface IProducts {
+export interface IProductOption {
+  amount: number;
+  size: number;
+}
+
+export interface IProduct {
   id: string;
   title: string;
   description: string;
@@ -28,21 +33,32 @@ export interface IProducts {
   type: string;
   cost: number;
   salePrice: number;
+  options: IProductOption[];
 }
 
 export interface IAllProduct {
-  getAllProducts: IProducts[];
+  getAllProducts: IProduct[];
+}
+
+export interface IGetOneParticualProductQuery {
+  getOneParticularProduct: IProduct;
 }
 
 export interface IGetProducts {
-  getProducts: { count: number; products: IProducts[] };
+  getProducts: { count: number; products: IProduct[] };
 }
 
 export interface ProductStateInterface {
   count: number[];
-  products: IProducts[];
+  products: IProduct[];
+  currentProduct: IProduct;
   currentPage: number;
   loading: boolean;
+}
+
+export interface IOption {
+  size: number;
+  amount: number;
 }
 
 export interface BasketProduct {

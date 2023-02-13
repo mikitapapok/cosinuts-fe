@@ -1,1 +1,45 @@
-<h3>a</h3>
+<ng-container *ngIf="(productInfo$|async) as info">
+  <div class="p-[20px] w-[100%] ml-0">
+    <a [routerLink]="'..'" class="text-[20px] text-grey-600 font-xl">Вернуться в каталог</a>
+  </div>
+  <ng-template [ngIf]="!info.id">
+    <section class="mt-[40px]">
+      <app-spiner></app-spiner>
+    </section>
+
+  </ng-template>
+  <ng-template [ngIf]="info.id">
+    <section class="mt-[40px] flex content-between items-stretch w-[1400px]">
+      <div class="flex flex-col items-center">
+        <img [src]="info.src  " alt="" width="455" height="400" class="rounded-[10px]">
+        <form [formGroup]="productFormGroup" (ngSubmit)="onSubmit()">
+          <div class="flex mt-[70px] ">
+            <div *ngFor="let option of info?.options; let optionIndex=index" class="">
+              <label class=" border-[1px] border-black py-[15px] pl-[60px] pr-[45px]"
+                     [ngClass]="[productFormGroup.get('option')?.value==option.size?'bg-orange text-white':'',
+                     optionIndex==0?'rounded-tl-[50px] rounded-bl-[50px]':'',
+                     optionIndex+1==info?.options?.length?'rounded-tr-[50px] rounded-br-[50px]':''
+                      ]"
+              >
+                <input type="radio" formControlName="option" [value]="option.size" class="hidden">
+                {{option.size}}gr
+              </label>
+            </div>
+          </div>
+          <!--          <button type="submit"> submit</button>-->
+        </form>
+      </div>
+      <div class="ml-[107px] w-[300px] flex flex-col items-start">
+        <p class="text-[20px]  whitespace-nowrap text-grey-600">{{info.description}}</p>
+        <p
+          class="mt-auto text-orange-800 text-[48px] font-xl">{{info.options| arrayFilter:productFormGroup.get('option')?.value}}
+          P</p>
+        <div class="mt-[20px]">
+          <app-basket-button [currentId]="info.id"></app-basket-button>
+        </div>
+
+      </div>
+    </section>
+  </ng-template>
+
+</ng-container>

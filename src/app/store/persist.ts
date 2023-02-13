@@ -6,7 +6,7 @@ export function localStorageReducer(
   reducer: ActionReducer<AppStateInterface>
 ): ActionReducer<AppStateInterface> {
   return localStorageSync({
-    keys: ['auth'],
+    keys: ['auth', 'products'],
     rehydrate: true,
   })(reducer);
 }

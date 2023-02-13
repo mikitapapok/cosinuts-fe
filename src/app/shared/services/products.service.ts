@@ -1,14 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
-import { IGetProducts } from '../interfaces/interfaces';
+import {
+  IGetOneParticualProductQuery,
+  IGetProducts,
+} from '../interfaces/interfaces';
 
 import { from, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
   private productQuery: QueryRef<IGetProducts>;
+  private getOneParticularProductQuery: QueryRef<IGetOneParticualProductQuery>;
 
   constructor(private apollo: Apollo) {
+    this.getOneParticularProductQuery =
+      this.apollo.watchQuery<IGetOneParticualProductQuery>({
+        query: gql`
+          query ($id: String) {
+            getOneParticularProduct(id: $id) {
+              id
+              title
+              description
+              type
+              src
+              cost
+              salePrice
+              options {
+                size
+                amount
+              }
+            }
+          }
+        `,
+      });
     this.productQuery = this.apollo.watchQuery<IGetProducts>({
       query: gql`
         query ($productType: String, $offset: Int) {
@@ -22,11 +46,21 @@ export class ProductsService {
               src
               cost
               salePrice
+              options {
+                size
+                amount
+              }
             }
           }
         }
       `,
     });
+  }
+
+  getOneParticularProduct(id: string) {
+    return from(this.getOneParticularProductQuery.refetch({ id })).pipe(
+      map(result => result?.data.getOneParticularProduct)
+    );
   }
 
   updateUser(products: string[], email: string) {

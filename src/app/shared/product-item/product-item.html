@@ -66,10 +66,6 @@
           stroke="#AAAAAA"/>
       </svg>
     </button>
-    <button
-      (click)="addToBasketHandler(product?.id)"
-      class="py-[15px] px-[18px] bg-orange rounded-[13px] text-m whitespace-nowrap">
-      В корзину
-    </button>
+    <app-basket-button [currentId]="product?.id"></app-basket-button>
   </div>
 </div>

@@ -1,10 +1,14 @@
-import { ProductStateInterface } from '../../shared/interfaces/interfaces';
+import {
+  IProduct,
+  ProductStateInterface,
+} from '../../shared/interfaces/interfaces';
 import { createReducer, on } from '@ngrx/store';
 import * as productActions from './products.actions';
 
 const initState: ProductStateInterface = {
   count: [],
   products: [],
+  currentProduct: {} as IProduct,
   currentPage: 0,
   loading: false,
 };
@@ -22,5 +26,13 @@ export const productsReducer = createReducer(
     })
   ),
   on(productActions.changeCurrentPage, state => ({ ...state, currentPage: 0 })),
-  on(productActions.runLoadingAction, state => ({ ...state, loading: true }))
+  on(productActions.runLoadingAction, state => ({ ...state, loading: true })),
+  on(productActions.addProductToTheStoreAction, (state, { product }) => ({
+    ...state,
+    currentProduct: product,
+  })),
+  on(productActions.clearCurrentProductAction, state => ({
+    ...state,
+    currentProduct: {} as IProduct,
+  }))
 );
