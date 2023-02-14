@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { AppStateInterface } from '../../shared/interfaces/interfaces';
+import {
+  AppStateInterface,
+  IProduct,
+} from '../../shared/interfaces/interfaces';
 import { Router } from '@angular/router';
 import * as authActions from './auth.actions';
 import {
@@ -14,6 +17,7 @@ import {
 } from 'rxjs';
 import { selectAuthSelector, userBasketSelector } from './auth.selectors';
 import { ProductsService } from '../../shared/services/products.service';
+import { productsSelector } from '../products-store/products.selectors';
 
 @Injectable()
 export class BasketEffects {
@@ -33,11 +37,32 @@ export class BasketEffects {
           this.router.navigate(['signup']);
           return of(authActions.noOpAction());
         }
-        return of(authActions.addProductIdAction({ id: action.id }));
+        return of(
+          authActions.addProductIdAction({ id: action.id, size: action.size })
+        );
       })
     );
   });
-
+  findProductEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.addProductIdAction),
+      withLatestFrom(this.store$.pipe(select(productsSelector))),
+      switchMap(([action, products]) => {
+        const currentProduct = products.filter(
+          (product: IProduct) => product.id === action.id
+        )[0];
+        const currentOption = currentProduct.options.filter(
+          option => option.size === action.size
+        )[0];
+        return of(
+          authActions.addProductInfoToBasket({
+            id: currentProduct.id,
+            ...currentOption,
+          })
+        );
+      })
+    );
+  });
   pushBasket = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.pushBasketToBackAction),

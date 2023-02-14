@@ -65,9 +65,15 @@ export interface BasketProduct {
   id: string;
 }
 
+export interface IBasketItem {
+  id: string;
+  size?: number;
+  amount: number;
+}
+
 export interface AuthStateInterface {
   email: string;
-  basket: string[];
+  basket: IBasketItem[];
   loading: boolean;
 }
 

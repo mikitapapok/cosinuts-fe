@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, QueryRef } from 'apollo-angular';
 import {
+  IBasketItem,
   IGetOneParticualProductQuery,
   IGetProducts,
 } from '../interfaces/interfaces';
@@ -63,12 +64,12 @@ export class ProductsService {
     );
   }
 
-  updateUser(products: string[], email: string) {
+  updateUser(products: IBasketItem[], email: string) {
     return this.apollo.mutate({
       mutation: gql`
-        mutation ($email: String, $products: [String]) {
+        mutation ($email: String, $products: [BasketItem]) {
           updateUser(input: { email: $email, products: $products }) {
-            products
+            message
           }
         }
       `,

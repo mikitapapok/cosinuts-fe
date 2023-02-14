@@ -12,12 +12,15 @@ import { Store } from '@ngrx/store';
 })
 export class BasketButtonComponent {
   @Input() currentId?: string;
+  @Input() currentSize?: number;
 
   constructor(private store$: Store<AppStateInterface>) {}
 
   addToBasketHandler() {
-    if (this.currentId) {
-      this.store$.dispatch(addToBasketAction({ id: this.currentId }));
+    if (this.currentId && this.currentSize) {
+      this.store$.dispatch(
+        addToBasketAction({ id: this.currentId, size: this.currentSize })
+      );
       this.store$.dispatch(pushBasketToBackAction());
     }
   }

@@ -28,19 +28,15 @@ export const authReducer = createReducer(
       loading: false,
     };
   }),
-  on(authActions.addProductIdAction, (state, { id }) => {
-    if (id) {
-      const newProductBasket = [...state.basket, id];
 
-      return {
-        ...state,
-        basket: newProductBasket,
-        loading: false,
-      };
-    }
+  on(authActions.addProductInfoToBasket, (state, props) => {
+    const newBasket = [
+      ...state.basket,
+      { id: props.id, size: props.size, amount: props.amount },
+    ];
     return {
       ...state,
-      basket: [],
+      basket: newBasket,
       loading: false,
     };
   })

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { IBasketItem } from '../../shared/interfaces/interfaces';
 
 export const signupAction = createAction(
   '[SignUp] signUp',
@@ -23,18 +24,21 @@ export const startLoadingAction = createAction('[Effect] launch loading');
 export const stopLoadingAction = createAction('[Effect]stop loading action');
 export const addUserInfoAction = createAction(
   '[Effect] add user info',
-  props<{ email: string; basket: string[] }>()
+  props<{ email: string; basket: IBasketItem[] }>()
 );
 
 export const addToBasketAction = createAction(
   '[Catalog] addToBasket',
-  props<{ id: string }>()
+  props<{ id: string; size: number }>()
 );
 export const addProductIdAction = createAction(
   '[Effect] add products id into the basket',
-  props<{ id?: string }>()
+  props<{ id?: string; size?: number }>()
 );
-
+export const addProductInfoToBasket = createAction(
+  '[Effect] add product info to basket',
+  props<{ id: string; size: number; amount: number }>()
+);
 export const pushBasketToBackAction = createAction(
   '[ProductItem] push basket to backend'
 );

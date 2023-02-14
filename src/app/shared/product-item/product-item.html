@@ -66,6 +66,8 @@
           stroke="#AAAAAA"/>
       </svg>
     </button>
-    <app-basket-button [currentId]="product?.id"></app-basket-button>
+
+    <app-basket-button [currentId]="product?.id"
+                       [currentSize]="product?.options?.[0]?.size"></app-basket-button>
   </div>
 </div>

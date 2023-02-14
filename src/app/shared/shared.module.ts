@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
-import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { CategoriesComponent } from './categories/categories.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { ProductItemComponent } from './product-item/product-item.component';
@@ -37,6 +37,7 @@ import { ArrayFilterPipe } from './pipes/filter.pipe';
     AsyncPipe,
 
     ReactiveFormsModule,
+    JsonPipe,
   ],
   declarations: [
     HeaderComponent,
